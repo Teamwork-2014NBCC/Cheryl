@@ -12,12 +12,18 @@ public:
 	std::vector<Coordinates*> normals;
 	std::vector<Coordinates*> UVs;
 	std::vector<Indices*> indices;
-	std::vector<std::vector<int>> smoothingGroups;
+	//std::vector<std::vector<int>> smoothingGroups;
 
 	std::string materialName;
 	std::string textureName;
 	std::string objectName;
 
+	int numVerts;
+	int numIndices;
+	float* vertsArray;
+	int* indicesArray;
+
+	void CovertToS3D();
 	OBJMesh();
 	~OBJMesh();
 };

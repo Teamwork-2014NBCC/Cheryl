@@ -1,6 +1,8 @@
 #ifndef _COORDINATES_H_
 #define _COORDINATES_H_
 
+#include <stdlib.h>
+
 class Coordinates
 {
 public:
@@ -12,6 +14,9 @@ public:
 		y = newy;
 		z = newz;
 	}
+	~Coordinates()
+	{
+	}
 };
 
 class Indices
@@ -20,12 +25,17 @@ public:
 	Coordinates* vertices;
 	Coordinates* normals;
 	Coordinates* UVs;
+	int index;
 
-	Indices(Coordinates* v, Coordinates* n, Coordinates* uv)
+	Indices(Coordinates* v, Coordinates* n, Coordinates* uv, int i)
 	{
 		vertices = v;
 		normals = n;
 		UVs = uv;
+		index = i;
+	}
+	~Indices()
+	{
 	}
 };
 #endif

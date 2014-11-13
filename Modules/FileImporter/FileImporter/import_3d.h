@@ -14,8 +14,9 @@
 class Import
 {
 public:
+	int lineCount;
+	bool hasIndices, timeToExit;
 	Import(std::string fileName, OBJMesh* mesh);
-	Import(std::string fileName, OBJMesh& mesh);
 	~Import();
 private:
 };

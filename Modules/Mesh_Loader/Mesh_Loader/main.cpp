@@ -29,6 +29,7 @@ S3DMesh* mesh_Hull = NULL;
 S3DMesh* mesh_Turret = NULL;
 S3DMesh* mesh_Wheel = NULL;
 S3DMesh* mesh_Box = NULL;
+S3DMesh* mesh_Golem = NULL;
 
 void Init()
 {
@@ -53,6 +54,7 @@ void Init()
 	mesh_Turret = new S3DMesh("APC_Turret.S3D", blit3D, prog, false);
 	mesh_Wheel = new S3DMesh("APC_Wheel.S3D", blit3D, prog, false);
 	mesh_Box = new S3DMesh("box.S3D", blit3D, prog, true);
+	mesh_Golem = new S3DMesh("golem.S3D", blit3D, prog, true);
 
 	blit3D->projectionMatrix *= glm::perspective(45.0f, (GLfloat)(blit3D->screenWidth) / (GLfloat)(blit3D->screenHeight), 0.1f, 10000.0f);
 
@@ -87,17 +89,20 @@ void DeInit(void)
 	delete mesh_Turret;
 	delete mesh_Wheel;
 	delete mesh_Box;
+	delete mesh_Golem;
 }
 
 void Update(double seconds)
 {
 	angle = angle + static_cast<float>(seconds)* 30;
 	while (angle > 360) angle = angle - 360;
+
 	mesh_Cannon->Update(seconds);
 	mesh_Hull->Update(seconds);
 	mesh_Turret->Update(seconds);
 	mesh_Wheel->Update(seconds);
 	mesh_Box->Update(seconds);
+	mesh_Golem->Update(seconds);
 }
 
 void Draw(void)
@@ -131,11 +136,16 @@ void Draw(void)
 	mesh_Box->Transform(10, 0, -20.0f + scroll);
 	mesh_Box->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
+	mesh_Golem->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Golem->Transform(0, 0, 0.0f + scroll);
+	mesh_Golem->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
+
 	mesh_Cannon->Draw(blit3D, prog);
 	mesh_Hull->Draw(blit3D, prog);
 	mesh_Turret->Draw(blit3D, prog);
 	mesh_Wheel->Draw(blit3D, prog);
 	mesh_Box->Draw(blit3D, prog);
+	mesh_Golem->Draw(blit3D, prog);
 
 	glBindVertexArray(0);//turn off vao again
 	//glfwSwapBuffers(window);
