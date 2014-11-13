@@ -7,6 +7,8 @@
 #include <mutex>
 #include <functional>
 #include <algorithm>
+#include <Windows.h>
+#include <iostream>
 
 class input_mgr
 {
@@ -15,6 +17,8 @@ private:
 	std::thread P1;
 	std::vector<int> input_list;
 	std::map<int, std::function<void()>> Key_Action_Map;
+	POINT curPos;
+	BOOL result;
 
 protected:
 	bool thread_running = false;
@@ -28,6 +32,8 @@ public:
 	
 	void Add(int key_input_value);
 	void Remove(int key_input_value);
+
+	void MouseInput();
 
 	void Start();
 	void Stop();

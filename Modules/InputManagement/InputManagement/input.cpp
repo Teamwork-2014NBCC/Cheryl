@@ -57,6 +57,24 @@ void input_mgr::Unlock()
 	input_mutex.unlock();
 }
 
+void input_mgr::MouseInput()
+{
+	while (thread_running)
+	{
+		result = GetCursorPos(&curPos);
+		//while loop based on bool
+		if (result)
+		{
+			std::cout << "The x is: " << curPos.x;
+			std::cout << "\nThe Y is: " << curPos.y;
+		}
+		if (GetAsyncKeyState(VK_LBUTTON))
+		{
+			std::cout << "Hello" << std::endl;
+		}
+	}
+}
+
 void input_mgr::Start()
 {
 	thread_running = true;
