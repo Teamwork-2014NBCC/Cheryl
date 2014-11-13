@@ -1,0 +1,5 @@
+How to use the Converter:
+1. Using 3Ds Max, export to an OBJ file with Triangle faces.
+2. Drop the OBJ files into the 'In' folder.
+3. Double click 'Converter.bat'.
+4. Converted files are located in 'Out' folder.
