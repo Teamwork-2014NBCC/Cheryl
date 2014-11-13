@@ -11,14 +11,19 @@
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-//extern GLFWwindow* window;
+extern GLFWwindow* window;
 
 //GLOBAL DATA
 
 //glm::mat4 modelMatrix;
 
 
-
+/******************************************************
+* S3DMesh Class
+* Imports S3D file and stores the information withing the class.
+* Created by:	Mark Murphy		Date:	Oct. 8, 2014
+* Modified by:	Mark Murphy		Date:	Nov. 13, 2014
+*******************************************************/
 class S3DMesh
 {
 private:
@@ -30,15 +35,16 @@ private:
 	GLuint vbo[2];
 	GLuint vao = 0;
 
-	glm::vec3 LightIntensity;
-
-
 	std::string meshName;
 	std::string textureName;
+
+	bool bStripped;
+
 	int numVerts;
 	int numIndices;
 	float* verts;
 	int* indices;
+
 	glm::mat4 modelMatrix;
 	glm::mat4 rotation_Matrix;
 	glm::mat4 translation_Matrix;
@@ -54,7 +60,7 @@ public:
 	void Scale(float x, float y, float z);
 	std::string GetTextureName();
 
-	S3DMesh(std::string fileName, Blit3D *blit3D, GLSLProgram *prog);
+	S3DMesh(std::string fileName, Blit3D *blit3D, GLSLProgram *prog, bool isStripped);
 	~S3DMesh();
 };
 

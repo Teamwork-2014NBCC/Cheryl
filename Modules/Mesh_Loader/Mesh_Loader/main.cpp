@@ -3,34 +3,16 @@ Example program that shows Blit3D is working
 */
 #include "S3DMesh.h"
 
-//#define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 Blit3D *blit3D = NULL;
 
 //GLOBAL DATA
 GLSLProgram *prog = NULL;
 
-//glm::mat4 modelMatrix;
 std::atomic<float> angle = 0;
 
-//GLuint vbo = 0;
-//GLuint vao = 0;
-
-//sprite test
-//Sprite *sprite = NULL;
-
-//bitmap font test
-//BFont *bfont = NULL;
-
-//cursor test
-//float cx, cy;
-
-//used for mouse button test
-//std::atomic<float> spriteSize1 = 2.f;
-//std::atomic<float> spriteSize2 = 2.f;
-
 //used for scroll wheel test
-//std::atomic<int> spriteLocator = 0;
+std::atomic<int> scroll = 0;
 
 //used for joystick test
 std::mutex joystickMutex;
@@ -42,88 +24,38 @@ float joystickTestPositionAxis4 = 0.f;
 float joystickTestPositionAxis5 = 0.f;
 bool foundJoystick = false;
 
-S3DMesh* mesh = NULL;
+S3DMesh* mesh_Cannon = NULL;
+S3DMesh* mesh_Hull = NULL;
+S3DMesh* mesh_Turret = NULL;
+S3DMesh* mesh_Wheel = NULL;
+S3DMesh* mesh_Box = NULL;
 
 void Init()
 {
+	blit3D->SetMode(Blit3DRenderMode::BLIT3D);
 
-	mesh = new S3DMesh("box.S3D", blit3D, prog);
+	prog = blit3D->sManager->UseShader("shader.vert", "shader.frag"); //load/compile/link
 
-	//// tell GL to only draw onto a pixel if the shape is closer to the viewer
-	//glEnable(GL_DEPTH_TEST); // enable depth-testing
-	//glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
+	//lighting variables
+	glm::vec3 LightPosition = glm::vec3(1.0f, 1.0f, 1.0f);
+	glm::vec3 LightIntensity = glm::vec3(0.4f, 1.0f, 0.0f);
 
-	///* OTHER STUFF GOES HERE NEXT */
-	//float halfWidth = blit3D->screenWidth * 0.5f;
-	//float halfHeight = blit3D->screenHeight * 0.5f;
-	//float points[] =
-	//{
-	//	-1.0f * halfWidth, -1.0f * halfHeight, 0.0f, 0.f, 0.f,
-	//	1.0f * halfWidth, -1.0f * halfHeight, 0.0f, 1.f, 0.f,
-	//	-1.0f * halfWidth, 1.0f * halfHeight, 0.0f, 0.f, 1.f,
-	//	1.0f * halfWidth, 1.0f * halfHeight, 0.0f, 1.f, 1.f
-	//};
+	//send lighting info to the shader
+	prog->setUniform("LightPosition", LightPosition);
+	prog->setUniform("LightIntensity", LightIntensity);
 
+	//send matrices to the shader
+	prog->setUniform("projectionMatrix", blit3D->projectionMatrix);
+	prog->setUniform("viewMatrix", blit3D->viewMatrix);
 
-	//glGenBuffers(1, &vbo);
-	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	//glBufferData(GL_ARRAY_BUFFER, 20 * sizeof(float), points, GL_STATIC_DRAW);
+	mesh_Cannon = new S3DMesh("APC_Cannon.S3D", blit3D, prog, false);
+	mesh_Hull = new S3DMesh("APC_Hull.S3D", blit3D, prog, false);
+	mesh_Turret = new S3DMesh("APC_Turret.S3D", blit3D, prog, false);
+	mesh_Wheel = new S3DMesh("APC_Wheel.S3D", blit3D, prog, false);
+	mesh_Box = new S3DMesh("box.S3D", blit3D, prog, true);
 
+	blit3D->projectionMatrix *= glm::perspective(45.0f, (GLfloat)(blit3D->screenWidth) / (GLfloat)(blit3D->screenHeight), 0.1f, 10000.0f);
 
-	//glGenVertexArrays(1, &vao);
-	//glBindVertexArray(vao);
-	//glEnableVertexAttribArray(0);
-	//glEnableVertexAttribArray(1);
-	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float)* 5, NULL);
-	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float)* 5, BUFFER_OFFSET(sizeof(float)* 3));
-
-	//glBindVertexArray(0); // Disable our Vertex Array Object? 
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);// Disable our Vertex Buffer Object
-
-
-	//prog = blit3D->sManager->UseShader("shader.vert", "shader.frag"); //load/compile/link
-
-	//modelMatrix = glm::mat4(1.f);
-
-	////2d orthographic projection
-	//blit3D->SetMode(Blit3DRenderMode::BLIT2D);
-
-	////3d perspective projection
-	////blit3D->projectionMatrix *= glm::perspective(45.0f, (GLfloat)(blit3D->screenWidth) / (GLfloat)(blit3D->screenHeight), 0.1f, 10000.0f);
-
-	////send matrices to the shader
-	//prog->setUniform("projectionMatrix", blit3D->projectionMatrix);
-	//prog->setUniform("viewMatrix", blit3D->viewMatrix);
-	//prog->setUniform("modelMatrix", modelMatrix);
-
-	////send alpha to the shader
-	//prog->setUniform("in_Alpha", 1.f);
-
-	////attributes
-	//prog->bindAttribLocation(0, "in_Position");
-	//prog->bindAttribLocation(1, "in_Texcoord");
-
-	//blit3D->tManager->LoadTexture("Logo.png", false);
-	//blit3D->tManager->LoadTexture("grassMid.png", true);
-
-	////enable blending
-	//glEnable(GL_BLEND);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
-	//prog->printActiveUniforms();
-	//prog->printActiveAttribs();
-
-	////load a sprite
-	//sprite = blit3D->MakeSprite(324, 140, 46, 46, "spritesheet.png");
-
-	////load a font set
-	//bfont = blit3D->MakeBFont("font.png", "fontMetrics.dat", 48.f);
-	//assert(bfont != NULL); //make sure it loaded
-
-	//cx = blit3D->screenWidth / 2;
-	//cy = blit3D->screenHeight / 2;
 
 
 	//NEVER call CheckJoystick()/ PollJoystick() from Update if not running Blit3DThreadModel::SINGLETHREADED, or any other thread you spawn.
@@ -149,19 +81,23 @@ void Init()
 
 void DeInit(void)
 {
-	//free any sprites still allocated
-	//if (sprite) delete sprite;
-	//free fonts
-	//if (bfont) delete bfont;
 	if (blit3D) delete blit3D;
-	delete mesh;
+	delete mesh_Cannon;
+	delete mesh_Hull;
+	delete mesh_Turret;
+	delete mesh_Wheel;
+	delete mesh_Box;
 }
 
 void Update(double seconds)
 {
 	angle = angle + static_cast<float>(seconds)* 30;
 	while (angle > 360) angle = angle - 360;
-	mesh->Update(seconds);
+	mesh_Cannon->Update(seconds);
+	mesh_Hull->Update(seconds);
+	mesh_Turret->Update(seconds);
+	mesh_Wheel->Update(seconds);
+	mesh_Box->Update(seconds);
 }
 
 void Draw(void)
@@ -171,80 +107,38 @@ void Draw(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	blit3D->SetMode(Blit3DRenderMode::BLIT3D);
 
-	mesh->Scale(2.0f, 2.5f, 0.4f);
-	mesh->Transform(0, 0, -10.0f);
-	mesh->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
-	mesh->Draw(blit3D, prog);
+	glm::vec3 LightIntensity = glm::vec3(1.0f, 1.0f, 1.0f);
+	prog->setUniform("LightIntensity", LightIntensity);
 
-	//float time = (float)glfwGetTime();
+	mesh_Cannon->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Cannon->Transform(-10, 0, -20.0f + scroll);
+	mesh_Cannon->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
-	////turn off the cursor
-	//blit3D->ShowCursor(false);
+	mesh_Hull->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Hull->Transform(-5, 0, -20.0f + scroll);
+	mesh_Hull->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
+	mesh_Turret->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Turret->Transform(0, 0, -20.0f + scroll);
+	mesh_Turret->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
-	////========BACKGROUND===============
-	//prog = blit3D->shader2d;
+	mesh_Wheel->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Wheel->Transform(5, 0, -20.0f + scroll);
+	mesh_Wheel->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
-	//blit3D->SetMode(Blit3DRenderMode::BLIT2D);
-	//glBindVertexArray(vao);
-	//modelMatrix = glm::translate(glm::mat4(1.f), glm::vec3(blit3D->screenWidth * 0.5f, blit3D->screenHeight * 0.5f, 0.f));
-	//prog->setUniform("modelMatrix", modelMatrix);
-	//blit3D->tManager->BindTexture("Logo.png");
+	mesh_Box->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Box->Transform(10, 0, -20.0f + scroll);
+	mesh_Box->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
-	//// draw points 0-4 from the currently bound VAO with current in-use shader
-	//glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	mesh_Cannon->Draw(blit3D, prog);
+	mesh_Hull->Draw(blit3D, prog);
+	mesh_Turret->Draw(blit3D, prog);
+	mesh_Wheel->Draw(blit3D, prog);
+	mesh_Box->Draw(blit3D, prog);
 
-	////reset depth buffer
-	//glClear(GL_DEPTH_BUFFER_BIT);
-	//glBindVertexArray(0); //turn off vao for now
-	////=================================
-
-	////========Image spinning in 3D=====
-	//prog = blit3D->sManager->UseShader("shader.vert", "shader.frag");
-
-	//blit3D->SetMode(Blit3DRenderMode::BLIT3D, prog);//also use this version of setMode when you want to have the shader's matrices automatically updated after changing the mode to 3D
-	//glBindVertexArray(vao); //we just re-use same vao in this example
-	//modelMatrix = glm::translate(glm::mat4(1.f), glm::vec3(-0.1f, 0.1f, -5000.f));
-	//modelMatrix = glm::rotate(modelMatrix, (float)angle, glm::vec3(0.f, 1.f, 0.f));
-	//prog->setUniform("modelMatrix", modelMatrix);
-	//blit3D->tManager->BindTexture("grassMid.png");
-
-	//// draw points 0-4 from the currently bound VAO with current in-use shader
-	//glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glBindVertexArray(0);//turn off vao again
 	//glfwSwapBuffers(window);
-	////=================================
-
-	////========2D STUFF===================
-	//blit3D->SetMode(Blit3DRenderMode::BLIT2D); //change to 2d mode before drawing sprites/text!
-
-	////========SPRITE===================
-	//sprite->Blit(cx, cy); //sprite on mouse
-	//sprite->Blit(blit3D->screenWidth - 100.f, 100.f, 4.f, 0.5f); //blit same sprite at set coords, 4 times larger and 50% alpha
-	//sprite->Blit(100.f, 100.f, 4.f, 1.f / (static_cast<int>(angle) % 10 + 1)); //blit same sprite at set coords, 4 times larger and varying alpha
-	//sprite->Blit(100.f, blit3D->screenHeight - 100.f, spriteSize1); //blit same sprite at set coords, size based on a varying scale
-	//sprite->Blit(blit3D->screenWidth - 100.f, blit3D->screenHeight - 100.f, spriteSize2); //blit same sprite at set coords, size based on a varying scale
-	//sprite->Blit(blit3D->screenWidth / 3, blit3D->screenHeight / 2 + 20.f * spriteLocator); //blit same sprite at coords set by scrollwheel input
-	//sprite->Blit(blit3D->screenWidth * 2.f / 3, blit3D->screenHeight / 2 - 20.f * spriteLocator); //blit same sprite at coords set by scrollwheel input
-
-	//joystickMutex.lock();
-	//sprite->Blit(blit3D->screenWidth * 1.f / 4 + joystickTestPositionAxis1,
-	//	blit3D->screenHeight / 2 + joystickTestPositionAxis2); //blit same sprite at coords set by joystick input
-	//sprite->Blit(blit3D->screenWidth * 3.f / 4 + joystickTestPositionAxis5,
-	//	blit3D->screenHeight / 2 + joystickTestPositionAxis4); //blit same sprite at coords set by joystick input
-	//joystickMutex.unlock();
-	////=================================
-
-	////while still in 2d mode, draw some text
-	////=======TEXT======================
-	//std::string text = "Blit3D is working.";
-	//float textWidth = bfont->WidthText(false, text);
-	//bfont->DrawText(false, blit3D->screenWidth - 20 - textWidth, 50, text);
-	////=================================
-
-	//blit3D->SetMode(Blit3DRenderMode::BLIT3D); //change back to 3d mode when done with 2D rendering
-	////=================================
 }
 
 //the key codes/actions/mods for DoInput are from GLFW: check its documentation for their values
@@ -299,19 +193,19 @@ void DoMouseButton(int button, int action, int mods)
 
 void DoScrollwheel(double xoffset, double yoffset)
 {
-	////A simple mouse wheel, being vertical, provides offsets along the Y-axis.
-	//if (yoffset > 0)
-	//{
-	//	//scrolled up
-	//	spriteLocator++;
-	//	if (spriteLocator > 10) spriteLocator = 10;
-	//}
-	//else if (yoffset < 0)
-	//{
-	//	//scrolled down
-	//	spriteLocator--;
-	//	if (spriteLocator < -10) spriteLocator = -10;
-	//}
+	//A simple mouse wheel, being vertical, provides offsets along the Y-axis.
+	if (yoffset > 0)
+	{
+		//scrolled up
+		scroll++;
+		if (scroll > 100) scroll = 100;
+	}
+	else if (yoffset < 0)
+	{
+		//scrolled down
+		scroll--;
+		if (scroll < -100) scroll = -100;
+	}
 }
 
 void DoJoystick(void)

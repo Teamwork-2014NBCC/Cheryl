@@ -62,12 +62,15 @@ void S3DMesh::Draw(Blit3D *blit3D, GLSLProgram *prog)
 	prog = blit3D->sManager->UseShader("shader.vert", "shader.frag");
 	prog->setUniform("modelMatrix", modelMatrix);
 
-	glm::vec3 LightIntensity = glm::vec3(1.0f, 1.0f, 1.0f);
-	prog->setUniform("LightIntensity", LightIntensity);
+	prog->setUniform("Kd", Kd);
+	prog->setUniform("Ka", Ka);
+	prog->setUniform("Ks", Ks);
+	prog->setUniform("Shininess", Shininess);
 
 	blit3D->tManager->BindTexture(GetTextureName());
 	// draw points 0-4 from the currently bound VAO with current in-use shader
-	glDrawElements(GL_TRIANGLE_STRIP, numIndices, GL_UNSIGNED_INT, BUFFER_OFFSET(0));
+	if (bStripped) glDrawElements(GL_TRIANGLE_STRIP, numIndices, GL_UNSIGNED_INT, BUFFER_OFFSET(0));
+	else glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, BUFFER_OFFSET(0));
 	//=================================
 }
 
@@ -120,12 +123,13 @@ std::string S3DMesh::GetTextureName()
 * S3DMesh constructer
 * Sets initial values
 * Created by:	Mark Murphy		Date: Oct. 8, 2014
-* Modified by:	Mark Murphy		Date: Oct. 8, 2014
+* Modified by:	Mark Murphy		Date: Nov. 13, 2014
 *****************************************************/
-S3DMesh::S3DMesh(std::string fileName, Blit3D *blit3D, GLSLProgram *prog)
+S3DMesh::S3DMesh(std::string fileName, Blit3D *blit3D, GLSLProgram *prog, bool isStripped)
 {
 	modelMatrix = glm::mat4(1.f);
 	Import(fileName);
+	bStripped = isStripped;
 
 	// tell GL to only draw onto a pixel if the shape is closer to the viewer
 	glEnable(GL_DEPTH_TEST); // enable depth-testing
@@ -159,15 +163,10 @@ S3DMesh::S3DMesh(std::string fileName, Blit3D *blit3D, GLSLProgram *prog)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);// Disable our Vertex Buffer Object
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);// Disable our Vertex Buffer Object
 
-
-
 	Kd = glm::vec3(1.0f, 1.0f, 0.2f); //diffuse reflectivity
 	Ka = glm::vec3(0.1f, 0.1f, 0.2f); //ambient reflectivity
 	Ks = glm::vec3(1.0f, 1.0f, 1.0f); //Specular reflectivity
 	Shininess = 1.0f; //Specular shininess factor
-
-
-	prog = blit3D->sManager->UseShader("shader.vert", "shader.frag"); //load/compile/link
 
 	//modelMatrix = glm::mat4(1.f);
 
@@ -175,25 +174,7 @@ S3DMesh::S3DMesh(std::string fileName, Blit3D *blit3D, GLSLProgram *prog)
 	//blit3D->projectionMatrix *= glm::ortho(0.f, (GLfloat)(blit3D->screenWidth), 0.f, (GLfloat)(blit3D->screenHeight), 0.f, 1.f);
 	//glDisable(GL_DEPTH_TEST);	// Disable Depth Testing for 2D!
 	//3d perspective projection
-	blit3D->projectionMatrix *= glm::perspective(45.0f, (GLfloat)(blit3D->screenWidth) / (GLfloat)(blit3D->screenHeight), 0.1f, 10000.0f);
 
-	//send matrices to the shader
-	prog->setUniform("projectionMatrix", blit3D->projectionMatrix);
-	prog->setUniform("viewMatrix", blit3D->viewMatrix);
-	prog->setUniform("modelMatrix", modelMatrix);
-
-	prog->setUniform("Kd", Kd);
-	prog->setUniform("Ka", Ka);
-	prog->setUniform("Ks", Ks);
-	prog->setUniform("Shininess", Shininess);
-
-	//lighting variables
-	glm::vec3 LightPosition = glm::vec3(1.0f, 1.0f, 1.0f);
-	glm::vec3 LightIntensity = glm::vec3(0.4f, 1.0f, 0.0f);
-
-	//send lighting info to the shader
-	prog->setUniform("LightPosition", LightPosition);
-	prog->setUniform("LightIntensity", LightIntensity);
 
 	//send alpha to the shader
 	prog->setUniform("in_Alpha", 1.f);
