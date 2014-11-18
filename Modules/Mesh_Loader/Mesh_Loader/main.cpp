@@ -136,7 +136,7 @@ void Draw(void)
 	mesh_Box->Transform(10, 0, -20.0f + scroll);
 	mesh_Box->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
-	mesh_Golem->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Golem->Scale(0.1f, 0.1f, 0.1f);
 	mesh_Golem->Transform(0, 0, 0.0f + scroll);
 	mesh_Golem->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
@@ -166,39 +166,6 @@ void DoCursor(double x, double y)
 
 void DoMouseButton(int button, int action, int mods)
 {
-	//if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-	//{
-	//	spriteSize2 = 0.5f;
-	//}
-	//else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
-	//{
-	//	spriteSize2 = 2.0f;
-	//}
-	//else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-	//{
-	//	spriteSize1 = 0.5f;
-	//}
-	//else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-	//{
-	//	spriteSize1 = 2.0f;
-	//}
-	//else if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS)
-	//{
-	//	/*	WARNING
-	//	DON'T DO THIS WITH ATOMICS:
-
-	//	spriteSize1 = spriteSize2 = 4.f;
-
-	//	It probably won't do what you want it to do; instead, set each atomic individually, like below.
-	//	*/
-	//	spriteSize1 = 4.f;
-	//	spriteSize2 = 4.f;
-	//}
-	//else if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_RELEASE)
-	//{
-	//	spriteSize1 = 2.f;
-	//	spriteSize2 = 2.f;
-	//}
 }
 
 void DoScrollwheel(double xoffset, double yoffset)
@@ -207,14 +174,14 @@ void DoScrollwheel(double xoffset, double yoffset)
 	if (yoffset > 0)
 	{
 		//scrolled up
-		scroll++;
-		if (scroll > 100) scroll = 100;
+		scroll += 5;
+		if (scroll > 1000) scroll = 1000;
 	}
 	else if (yoffset < 0)
 	{
 		//scrolled down
-		scroll--;
-		if (scroll < -100) scroll = -100;
+		scroll -= 5;
+		if (scroll < -1000) scroll = -1000;
 	}
 }
 
