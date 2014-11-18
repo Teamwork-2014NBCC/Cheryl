@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{ca9960d0-3717-4645-81c2-c71404b61e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Combat">
+      <UniqueIdentifier>{8b1f4a7b-08f0-46c8-87e4-ebf839f6d431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Combat">
+      <UniqueIdentifier>{f76e0356-67a3-40d4-8778-6868bd50718f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Texture Manager">
+      <UniqueIdentifier>{f0c0ec60-4685-480e-8328-5e67cde79bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Texture Manager">
+      <UniqueIdentifier>{637bb906-e150-4af5-a007-770232913258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Mesh Loader">
+      <UniqueIdentifier>{9b9231fa-27c4-4d06-98ce-c795e23a63b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mesh Loader">
+      <UniqueIdentifier>{c633a411-8985-4a54-a10c-367d25786ef6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Combat.h">
+      <Filter>Header Files\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Header Files\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header Files\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="items.h">
+      <Filter>Header Files\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="Stat_System.h">
+      <Filter>Header Files\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_mgr.h">
+      <Filter>Header Files\Texture Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="S3DMesh.h">
+      <Filter>Header Files\Mesh Loader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Combat.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_funcs.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="items.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="MainCombat.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="mainInput.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="Stat_System.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_mgr.cpp">
+      <Filter>Source Files\Texture Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="S3DMesh.cpp">
+      <Filter>Source Files\Mesh Loader</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
