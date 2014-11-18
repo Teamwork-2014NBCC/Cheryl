@@ -79,7 +79,9 @@ inline void game::Init()
 
 	int RanNum1 = rand() % 6 + 1;
 	int RanNum2 = rand() % 10 + 1;
-	this->newItem = new items();
+
+
+	items *newItem = new items();
 	newItem->GenItem(RanNum1, RanNum2);
 	std::cout << newItem->ItemName << std::endl;
 
