@@ -1,0 +1,5 @@
+Change your student ID to your own and configure to where Cheryl is on your computer.
+
+Include : C:\Users\ID\Desktop\Project Management Code\Cheryl\Libraries\college\;C:\Users\2019459\Desktop\Project Management Code\Cheryl\Libraries;
+
+Library : C:\Users\ID\Desktop\Project Management Code\Cheryl\Libraries\$lib;C:\Users\2019459\Desktop\Project Management Code\Cheryl\Libraries\college;
