@@ -86,7 +86,6 @@ inline void game::Init()
 	std::cout << newItem->ItemName << std::endl;
 
 	player->Equipitem(newItem);
-	
 
 	mouseMutex.lock();
 	cx = get_blit3d()->screenWidth / 2;
@@ -132,6 +131,7 @@ inline void game::DoInput(int& key, int& scancode, int& action, int& mods)
 	{
 		Input_Mgr.Add(key);
 	}
+
 	else if ( action == 0 )
 	{
 		Input_Mgr.Remove(key);

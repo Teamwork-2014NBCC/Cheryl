@@ -2,7 +2,7 @@
 #include "Combat.h"
 #include "Player.h"
 
-
+Combat *combat;
 
 void input_mgr::Run_Action(int key_input_value)
 {
@@ -76,7 +76,9 @@ void input_mgr::MouseInput()
 		}
 		if (GetAsyncKeyState(VK_LBUTTON))
 		{
-			//combat->B_Attack();
+			std::cout << "hello" << std::endl;
+
+			combat->B_Attack();
 		}
 	}
 }
