@@ -25,6 +25,11 @@ protected:
 	int statPoints = 0;					//Stat points per level
 	int abilityPoints = 0;				//Ability points per however many levels.
 
+
+
+
+	
+
 	std::string currentEquip;			//currently equipped weapon
 	
 
@@ -44,6 +49,7 @@ public:
 };
 
 class base_game_entity : public Stat_System
-{};
+{
+};
 
 #endif STAT_SYSTEM_H

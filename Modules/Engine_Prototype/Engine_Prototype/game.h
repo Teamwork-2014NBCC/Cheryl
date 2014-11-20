@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Stat_System.h"
 #include "Combat.h"
+#include "S3DMesh.h"
 
 
 class game
@@ -23,6 +24,18 @@ private:
 	input_mgr Input_Mgr;
 	std::mutex mouseMutex;
 	float cx, cy;
+
+
+	GLSLProgram *prog = NULL;
+
+	std::atomic<float> angle = 0;
+
+	S3DMesh* mesh_Cannon = NULL;
+	S3DMesh* mesh_Hull = NULL;
+	S3DMesh* mesh_Turret = NULL;
+	S3DMesh* mesh_Wheel = NULL;
+	S3DMesh* mesh_Box = NULL;
+	S3DMesh* mesh_Golem = NULL;
 
 protected:
 public:

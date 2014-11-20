@@ -7,7 +7,6 @@
 #include <fstream>
 #include <stdio.h>
 #include <conio.h>
-#include <atomic>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 

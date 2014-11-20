@@ -65,9 +65,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Combat.cpp">
       <Filter>Source Files\Combat</Filter>
     </ClCompile>
@@ -78,12 +75,6 @@
       <Filter>Source Files\Combat</Filter>
     </ClCompile>
     <ClCompile Include="items.cpp">
-      <Filter>Source Files\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="MainCombat.cpp">
-      <Filter>Source Files\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="mainInput.cpp">
       <Filter>Source Files\Combat</Filter>
     </ClCompile>
     <ClCompile Include="Stat_System.cpp">
@@ -97,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="S3DMesh.cpp">
       <Filter>Source Files\Mesh Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

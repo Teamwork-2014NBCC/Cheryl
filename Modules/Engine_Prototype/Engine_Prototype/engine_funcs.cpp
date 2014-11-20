@@ -23,7 +23,7 @@
 
 Blit3D* get_blit3d()
 {
-	static Blit3D* the_blit3D = new Blit3D(Blit3DWindowModel::DECORATEDWINDOW, 700, 400);
+	static Blit3D* the_blit3D = new Blit3D(Blit3DWindowModel::DECORATEDWINDOW, 1280, 720);
 	return the_blit3D;
 }
 
@@ -79,7 +79,9 @@ inline void game::Init()
 
 	int RanNum1 = rand() % 6 + 1;
 	int RanNum2 = rand() % 10 + 1;
-	this->newItem = new items();
+
+
+	items *newItem = new items();
 	newItem->GenItem(RanNum1, RanNum2);
 	std::cout << newItem->ItemName << std::endl;
 
@@ -92,6 +94,29 @@ inline void game::Init()
 	mouseMutex.unlock();
 	
 	get_blit3d()->SetMode(Blit3DRenderMode::BLIT3D); //change to 2d mode before drawing sprites/text!
+
+	prog = get_blit3d()->sManager->UseShader("shader.vert", "shader.frag"); //load/compile/link
+
+	//lighting variables
+	glm::vec3 LightPosition = glm::vec3(1.0f, 1.0f, 1.0f);
+	glm::vec3 LightIntensity = glm::vec3(0.4f, 1.0f, 0.0f);
+
+	//send lighting info to the shader
+	prog->setUniform("LightPosition", LightPosition);
+	prog->setUniform("LightIntensity", LightIntensity);
+
+	//send matrices to the shader
+	prog->setUniform("projectionMatrix", get_blit3d()->projectionMatrix);
+	prog->setUniform("viewMatrix", get_blit3d()->viewMatrix);
+
+	mesh_Cannon = new S3DMesh("APC_Cannon.S3D", get_blit3d(), prog, false);
+	mesh_Hull = new S3DMesh("APC_Hull.S3D", get_blit3d(), prog, false);
+	mesh_Turret = new S3DMesh("APC_Turret.S3D", get_blit3d(), prog, false);
+	mesh_Wheel = new S3DMesh("APC_Wheel.S3D", get_blit3d(), prog, false);
+	mesh_Box = new S3DMesh("box.S3D", get_blit3d(), prog, true);
+	mesh_Golem = new S3DMesh("golem.S3D", get_blit3d(), prog, true);
+
+	get_blit3d()->projectionMatrix *= glm::perspective(45.0f, (GLfloat)(get_blit3d()->screenWidth) / (GLfloat)(get_blit3d()->screenHeight), 0.1f, 10000.0f);
 }
 
 inline void game::DeInit(void)
@@ -100,12 +125,28 @@ inline void game::DeInit(void)
 	delete newItem;
 	delete get_blit3d();
 	dbg::FileLog_Mgr::Stop();
+
+	delete mesh_Cannon;
+	delete mesh_Hull;
+	delete mesh_Turret;
+	delete mesh_Wheel;
+	delete mesh_Box;
+	delete mesh_Golem;
 }
 
 inline void game::Update(double& seconds)
 {
 	// Instruct the world to perform a single step of simulation.
 	// It is generally best to keep the time step and iterations fixed.
+	angle = angle + static_cast<float>(seconds)* 30;
+	while (angle > 360) angle = angle - 360;
+
+	mesh_Cannon->Update(seconds);
+	mesh_Hull->Update(seconds);
+	mesh_Turret->Update(seconds);
+	mesh_Wheel->Update(seconds);
+	mesh_Box->Update(seconds);
+	mesh_Golem->Update(seconds);
 }
 
 inline void game::Draw(void)
@@ -115,6 +156,44 @@ inline void game::Draw(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//draw sprites, from front to back
+	get_blit3d()->SetMode(Blit3DRenderMode::BLIT3D);
+
+
+	glm::vec3 LightIntensity = glm::vec3(1.0f, 1.0f, 1.0f);
+	prog->setUniform("LightIntensity", LightIntensity);
+
+	mesh_Cannon->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Cannon->Transform(-10, 0, -50.0f);
+	mesh_Cannon->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
+
+	mesh_Hull->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Hull->Transform(-5, 0, -50.0f);
+	mesh_Hull->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
+
+	mesh_Turret->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Turret->Transform(0, 0, -50.0f);
+	mesh_Turret->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
+
+	mesh_Wheel->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Wheel->Transform(5, 0, -50.0f);
+	mesh_Wheel->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
+
+	mesh_Box->Scale(1.0f, 1.0f, 1.0f);
+	mesh_Box->Transform(10, 0, -50.0f);
+	mesh_Box->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
+
+	mesh_Golem->Scale(0.1f, 0.1f, 0.1f);
+	mesh_Golem->Transform(0, 0, -30.0f);
+	mesh_Golem->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
+
+	mesh_Cannon->Draw(get_blit3d(), prog);
+	mesh_Hull->Draw(get_blit3d(), prog);
+	mesh_Turret->Draw(get_blit3d(), prog);
+	mesh_Wheel->Draw(get_blit3d(), prog);
+	mesh_Box->Draw(get_blit3d(), prog);
+	mesh_Golem->Draw(get_blit3d(), prog);
+
+	glBindVertexArray(0);//turn off vao again
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 	//usually want to draw text last

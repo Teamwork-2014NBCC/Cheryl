@@ -1,4 +1,8 @@
 #include "input.h"
+#include "Combat.h"
+#include "Player.h"
+
+
 
 void input_mgr::Run_Action(int key_input_value)
 {
@@ -60,6 +64,7 @@ void input_mgr::Unlock()
 
 void input_mgr::MouseInput()
 {
+	
 	while (thread_running)
 	{
 		result = GetCursorPos(&curPos);
@@ -71,7 +76,7 @@ void input_mgr::MouseInput()
 		}
 		if (GetAsyncKeyState(VK_LBUTTON))
 		{
-			std::cout << "Hello" << std::endl;
+			//combat->B_Attack();
 		}
 	}
 }

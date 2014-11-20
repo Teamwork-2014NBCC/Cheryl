@@ -4,12 +4,11 @@
 #include <iostream>
 #include <conio.h>
 #include <string>
-#include "Input.h"
 #include "items.h"
 
 #include "Stat_System.h"
 
-class Player: protected base_game_entity
+class Player: protected base_game_entity, items
 {	
 private:
 	items* player_item = nullptr;
@@ -21,6 +20,8 @@ public:
 	
 	int GetBaseDamage(int damagedealt);
 	void AdjustPlayerHealth(int damagedealt);
+
+	~Player();
 };
 
 

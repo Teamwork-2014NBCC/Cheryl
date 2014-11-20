@@ -20,6 +20,7 @@ Player::Player(int statpoints)
 	this->movementSpeed = calcMoveSpeed();
 	this->health = calcHealth();
 	this->damageReduction = calcDamageReduction();
+
 	LevelUp();
 }
 //each level a player gains 5 stat points to add
@@ -61,29 +62,29 @@ void Player::LevelUp()
 		{
 		case '1':
 			str += 1;
-			this->statPoints -= 1;
-			this->damage = calcDamage();
-			this->physSkillDamage = calcPhysicalSkillDamage();
-			this->attackSpeed = calcAttackSpeed();
+			statPoints -= 1;
+			damage = calcDamage();
+			physSkillDamage = calcPhysicalSkillDamage();
+			attackSpeed = calcAttackSpeed();
 			break;
 		case '2':
 			intel += 1;
-			this->statPoints -= 1;
-			this->magicSkillDamage = calcMagicSkillDamage();
+			statPoints -= 1;
+			magicSkillDamage = calcMagicSkillDamage();
 			break;
 		case '3':
 			spd += 1;
-			this->statPoints -= 1;
-			this->dodgeChance = calcDodgeChance();
-			this->hitChance = calcHitChance();
-			this->movementSpeed = calcMoveSpeed();
-			this->attackSpeed = calcAttackSpeed();
+			statPoints -= 1;
+			dodgeChance = calcDodgeChance();
+			hitChance = calcHitChance();
+			movementSpeed = calcMoveSpeed();
+			attackSpeed = calcAttackSpeed();
 			break;
 		case '4':
 			con += 1;
-			this->statPoints -= 1;
-			this->health = calcHealth();
-			this->damageReduction = calcDamageReduction();
+			statPoints -= 1;
+			health = calcHealth();
+			damageReduction = calcDamageReduction();
 			break;
 		default:
 			std::cout << "sukadikbro you did it wrong" << std::endl;
@@ -112,7 +113,6 @@ void Player::LevelUp()
 void Player::Equipitem(items* newItem)	
 {
 	
-
 	str += newItem->strMod;
 	intel += newItem->intelMod;
 	spd += newItem->spdMod;
@@ -144,15 +144,15 @@ void Player::Equipitem(items* newItem)
 
 	currentEquip = newItem->ItemName;
 
-	this->damage = calcDamage();
-	this->physSkillDamage = calcPhysicalSkillDamage();
-	this->attackSpeed = calcAttackSpeed();
-	this->magicSkillDamage = calcMagicSkillDamage();
-	this->dodgeChance = calcDodgeChance();
-	this->hitChance = calcHitChance();
-	this->movementSpeed = calcMoveSpeed();
-	this->health = calcHealth();
-	this->damageReduction = calcDamageReduction();
+	damage = calcDamage();
+	physSkillDamage = calcPhysicalSkillDamage();
+	attackSpeed = calcAttackSpeed();
+	magicSkillDamage = calcMagicSkillDamage();
+	dodgeChance = calcDodgeChance();
+	hitChance = calcHitChance();
+	movementSpeed = calcMoveSpeed();
+	health = calcHealth();
+	damageReduction = calcDamageReduction();
 
 
 	system("cls");
@@ -187,4 +187,9 @@ void Player::AdjustPlayerHealth(int damagedealt)
 
 	std::cout << health << std::endl;
 
+}
+
+Player::~Player()
+{
+	delete player_item;
 }
