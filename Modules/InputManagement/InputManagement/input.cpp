@@ -3,7 +3,7 @@
 void input_mgr::Run_Action(int key_input_value)
 {
 	Map_mutex.lock();
-	(Key_Action_Map.find(key_input_value))->second();
+	Key_Action_Map[key_input_value]();
 	Map_mutex.unlock();
 }
 
@@ -41,7 +41,10 @@ void input_mgr::ProcessQueue()
 		inputQ_mutex.lock();
 		for ( auto key_queued : input_list )
 		{
-			Run_Action(key_queued);
+			if ( Key_Action_Map.find(key_queued) != Key_Action_Map.end() )
+			{
+				Run_Action(key_queued);
+			}
 		}
 		inputQ_mutex.unlock();
 	} while ( thread_running );
