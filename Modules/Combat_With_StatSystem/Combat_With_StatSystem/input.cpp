@@ -1,70 +1,69 @@
 #include "input.h"
-#include "Combat.h"
-#include "Player.h"
-
-Combat *combat;
 
 void input_mgr::Run_Action(int key_input_value)
 {
-	Lock();
-	(Key_Action_Map.find(key_input_value))->second();
-	Unlock();
+	Map_mutex.lock();
+	Key_Action_Map[key_input_value]();
+	Map_mutex.unlock();
 }
 
 void input_mgr::Register_Action(int key_input_value, std::function<void()> action)
 {
-	Lock();
+	Map_mutex.lock();
 	Key_Action_Map[key_input_value] = action;
-	Unlock();
+	Map_mutex.unlock();
+
+	inputQ_mutex.lock();
+	Queued_Input[key_input_value] = false;
+	inputQ_mutex.unlock();
 }
 
 void input_mgr::Add(int key_input_value)
 {
-	Lock();
-	input_list.push_back(key_input_value);
-	Unlock();
+	inputQ_mutex.lock();
+	if ( !Queued_Input[key_input_value] )
+	{
+		input_list.push_back(key_input_value);
+		Queued_Input[key_input_value] = true;
+	}
+	inputQ_mutex.unlock();
 }
 
 void input_mgr::Remove(int key_input_value)
 {
-	Lock();
-	for ( int i = 0; i < input_list.size(); ++i )
+	inputQ_mutex.lock();
+	if ( Queued_Input[key_input_value] )
 	{
-		if ( key_input_value == input_list[i] )
+		for ( int i = 0; i < input_list.size(); ++i )
 		{
-			input_list.erase(input_list.begin() + i);
+			if ( key_input_value == input_list[i] )
+			{
+				input_list.erase(input_list.begin() + i);
+				Queued_Input[key_input_value] = false;
+			}
 		}
 	}
-	Unlock();
+	inputQ_mutex.unlock();
 }
 
 void input_mgr::ProcessQueue()
 {
 	do
 	{
-		Lock();
+		inputQ_mutex.lock();
 		for ( auto key_queued : input_list )
 		{
-			Run_Action(key_queued);
+			if ( Key_Action_Map.find(key_queued) != Key_Action_Map.end() )
+			{
+				Run_Action(key_queued);
+			}
 		}
-		Unlock();
+		inputQ_mutex.unlock();
 	} while ( thread_running );
 }
 
-void input_mgr::Lock()
-{
-	input_mutex.lock();
-}
-
-void input_mgr::Unlock()
-{
-	input_mutex.unlock();
-}
-
-
 void input_mgr::MouseInput()
 {
-	
 	while (thread_running)
 	{
 		result = GetCursorPos(&curPos);
@@ -76,9 +75,7 @@ void input_mgr::MouseInput()
 		}
 		if (GetAsyncKeyState(VK_LBUTTON))
 		{
-			std::cout << "hello" << std::endl;
-
-			combat->B_Attack();
+			std::cout << "Hello" << std::endl;
 		}
 	}
 }

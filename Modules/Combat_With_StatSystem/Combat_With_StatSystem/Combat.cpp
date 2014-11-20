@@ -1,14 +1,15 @@
 #include "combat.h"
 
 
-Combat::Combat(Player *player)
+Combat::Combat(Player&)
 {
 
 }
 void Combat::B_Attack()
 {
 
-	//calls SetTarget()
+	//movement sets target SetTarget()
+	GetDamage(damagedealt);
 
 
 }
@@ -41,6 +42,7 @@ void Combat::doCombat()
 
 void Combat::SetTarget(base_game_entity* target)
 {
+
 }
 
 
@@ -52,5 +54,11 @@ bool Combat::InRange()
 bool Combat::Evade()
 {
 	return false;
+}
+
+int Combat::GetDamage(int)
+{
+	//damagedealt = player->damage
+	return 1;
 }
 

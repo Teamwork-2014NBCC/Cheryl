@@ -75,7 +75,7 @@ inline void game::Init()
 	//assert(bfont != NULL); //make sure it loaded
 
 	this->player = new Player();
-	this->combat = new Combat(player);
+	//this->combat = new Combat(player);
 	this->stat_System = new Stat_System();
 
 	int RanNum1 = rand() % 6 + 1;
@@ -98,7 +98,8 @@ inline void game::Init()
 
 
 
-	Input_Mgr.Register_Action(GLFW_KEY_1, std::bind(&Player::LevelUp, player));
+	Input_Mgr.Register_Action(GLFW_KEY_C, std::bind(&Player::LevelUp, player));
+	Input_Mgr.Register_Action(GLFW_KEY_0, std::bind(&Combat::B_Attack, combat));
 	Input_Mgr.Start();
 	
 	get_blit3d()->SetMode(Blit3DRenderMode::BLIT3D); //change to 2d mode before drawing sprites/text!

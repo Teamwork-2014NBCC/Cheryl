@@ -12,7 +12,7 @@ private:
 public:
 	int damagedealt;
 	int damageTaken;
-	Combat(Player *player);
+	Combat(Player&);
 	//cooldown goes in abilities
 
 	std::string skillused;
@@ -27,6 +27,7 @@ public:
 	bool InRange(); 
 	std::string GetSkillUsed();
 	void doCombat();
+	int GetDamage(int);
 
 
 };

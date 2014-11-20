@@ -1,5 +1,6 @@
 #include "Player.h"
 
+
 //This creates our base player (no adjustments made)
 Player::Player(int statpoints)
 {
@@ -49,10 +50,12 @@ void Player::LevelUp()
 	std::cout << "Movement Speed: " << movementSpeed << std::endl;
 
 
+
 	while (this->statPoints != 0 && exit == false)	//while there are stat points left or the player has not exited
 	{
 
 		char tempStatAdjust = ' ';
+
 
 
 		while (!_kbhit()){}
