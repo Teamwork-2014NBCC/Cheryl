@@ -1,9 +1,13 @@
 #ifndef _INPUT_H_
 #define _INPUT_H_
 
+//Version 1.2
+//Last Updated: 2014.11.20@11:30am
+
 #include <vector>
 #include <thread>
 #include <map>
+#include <unordered_map>
 #include <mutex>
 #include <functional>
 #include <algorithm>
@@ -17,7 +21,8 @@ private:
 	std::mutex Map_mutex;
 	std::thread P1;
 	std::vector<int> input_list;
-	std::map<int, std::function<void()>> Key_Action_Map;
+	std::unordered_map<int, bool> Queued_Input;
+	std::unordered_map<int, std::function<void()>> Key_Action_Map;
 	POINT curPos;
 	BOOL result;
 

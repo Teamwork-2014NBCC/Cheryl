@@ -109,11 +109,11 @@ inline void game::Draw(void)
 //the key codes/actions/mods for DoInput are from GLFW: check its documentation for their values
 inline void game::DoInput(int& key, int& scancode, int& action, int& mods)
 {
-	if ( action == 1 )
+	if ( action == GLFW_PRESS )
 	{
 		Input_Mgr.Add(key);
 	}
-	else if ( action == 0 )
+	else if ( action == GLFW_RELEASE )
 	{
 		Input_Mgr.Remove(key);
 	}

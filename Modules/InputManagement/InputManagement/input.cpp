@@ -12,23 +12,35 @@ void input_mgr::Register_Action(int key_input_value, std::function<void()> actio
 	Map_mutex.lock();
 	Key_Action_Map[key_input_value] = action;
 	Map_mutex.unlock();
+
+	inputQ_mutex.lock();
+	Queued_Input[key_input_value] = false;
+	inputQ_mutex.unlock();
 }
 
 void input_mgr::Add(int key_input_value)
 {
 	inputQ_mutex.lock();
-	input_list.push_back(key_input_value);
+	if ( !Queued_Input[key_input_value] )
+	{
+		input_list.push_back(key_input_value);
+		Queued_Input[key_input_value] = true;
+	}
 	inputQ_mutex.unlock();
 }
 
 void input_mgr::Remove(int key_input_value)
 {
 	inputQ_mutex.lock();
-	for ( int i = 0; i < input_list.size(); ++i )
+	if ( Queued_Input[key_input_value] )
 	{
-		if ( key_input_value == input_list[i] )
+		for ( int i = 0; i < input_list.size(); ++i )
 		{
-			input_list.erase(input_list.begin() + i);
+			if ( key_input_value == input_list[i] )
+			{
+				input_list.erase(input_list.begin() + i);
+				Queued_Input[key_input_value] = false;
+			}
 		}
 	}
 	inputQ_mutex.unlock();
