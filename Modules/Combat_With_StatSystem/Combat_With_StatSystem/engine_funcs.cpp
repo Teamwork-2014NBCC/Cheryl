@@ -1,9 +1,10 @@
 #include <blit3d\Blit3D.h>
 #include <debug_toolset.h>
 
-#include <atomic>
-#include <stdio.h>
 #include <conio.h>
+#include <stdio.h>
+#include <functional>
+#include <atomic>
 #include <thread>
 
 #include "Player.h"
@@ -80,10 +81,13 @@ inline void game::Init()
 	int RanNum1 = rand() % 6 + 1;
 	int RanNum2 = rand() % 10 + 1;
 
+	
 
 	items *newItem = new items();
 	newItem->GenItem(RanNum1, RanNum2);
 	std::cout << newItem->ItemName << std::endl;
+
+	
 
 	player->Equipitem(newItem);
 
@@ -91,6 +95,11 @@ inline void game::Init()
 	cx = get_blit3d()->screenWidth / 2;
 	cy = get_blit3d()->screenHeight / 2;
 	mouseMutex.unlock();
+
+
+
+	Input_Mgr.Register_Action(GLFW_KEY_1, std::bind(&Player::LevelUp, player));
+	Input_Mgr.Start();
 	
 	get_blit3d()->SetMode(Blit3DRenderMode::BLIT3D); //change to 2d mode before drawing sprites/text!
 }
@@ -100,6 +109,7 @@ inline void game::DeInit(void)
 	delete stat_System;
 	delete newItem;
 	delete get_blit3d();
+	Input_Mgr.Stop();
 	dbg::FileLog_Mgr::Stop();
 }
 

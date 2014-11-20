@@ -1,4 +1,3 @@
-#include "player.h"
 #include "combat.h"
 
 
@@ -9,8 +8,8 @@ Combat::Combat(Player *player)
 void Combat::B_Attack()
 {
 
- 	//player.GetBaseDamage(damagedealt);
-	doCombat(damagedealt);
+	//calls SetTarget()
+
 
 }
 
@@ -22,11 +21,11 @@ void Combat::S_Attack()
 }
 
 
-void Combat::doCombat(int damagedealt)
+void Combat::doCombat()
 {
 	if (!InRange())
 	{
-		damagedealt = 0;
+		//damagedealt = 0;
 
 	}
 	else

@@ -37,16 +37,7 @@ void main()
 	//Run() blocks until the window is closed
 	get_blit3d()->Run(Blit3DThreadModel::SIMPLEMULTITHREADED);
 
-
-
-
 	system("pause");
-
-
-	
-
-
-
 
 
 }

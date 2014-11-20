@@ -21,7 +21,7 @@ Player::Player(int statpoints)
 	this->health = calcHealth();
 	this->damageReduction = calcDamageReduction();
 
-	LevelUp();
+	//LevelUp();
 }
 //each level a player gains 5 stat points to add
 //to their character which will adjusts it's damage,health,speed, etc...
@@ -60,19 +60,19 @@ void Player::LevelUp()
 
 		switch (tempStatAdjust)						//adjusts stats based on input from player
 		{
-		case '1':
+		case '2':
 			str += 1;
 			statPoints -= 1;
 			damage = calcDamage();
 			physSkillDamage = calcPhysicalSkillDamage();
 			attackSpeed = calcAttackSpeed();
 			break;
-		case '2':
+		case '3':
 			intel += 1;
 			statPoints -= 1;
 			magicSkillDamage = calcMagicSkillDamage();
 			break;
-		case '3':
+		case '4':
 			spd += 1;
 			statPoints -= 1;
 			dodgeChance = calcDodgeChance();
@@ -80,7 +80,7 @@ void Player::LevelUp()
 			movementSpeed = calcMoveSpeed();
 			attackSpeed = calcAttackSpeed();
 			break;
-		case '4':
+		case '5':
 			con += 1;
 			statPoints -= 1;
 			health = calcHealth();
@@ -174,17 +174,17 @@ void Player::Equipitem(items* newItem)
 
 }
 
-int Player::GetBaseDamage(int damagedealt)
-{
-
-	damagedealt = damage;
-	return damagedealt;
-}
-
-void Player::AdjustPlayerHealth(int damagedealt)
-{
-	health = health - damagedealt;
-
-	std::cout << health << std::endl;
-
-}
+//int Player::GetBaseDamage(int damagedealt)
+//{
+//
+//	damagedealt = damage;
+//	return damagedealt;
+//}
+//
+//void Player::AdjustPlayerHealth(int damagedealt)
+//{
+//	health = health - damagedealt;
+//
+//	std::cout << health << std::endl;
+//
+//}

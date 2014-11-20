@@ -26,7 +26,7 @@ public:
 	bool Evade();
 	bool InRange(); 
 	std::string GetSkillUsed();
-	void doCombat(int damagedealt);
+	void doCombat();
 
 
 };

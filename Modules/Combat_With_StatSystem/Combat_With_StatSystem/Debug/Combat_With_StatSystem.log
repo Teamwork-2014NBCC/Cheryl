@@ -1,34 +1,19 @@
-﻿Build started 11/18/2014 10:08:49 AM.
-     1>Project "C:\Users\5003366\Desktop\GitHub\Cheryl\Modules\Combat_With_StatSystem\Combat_With_StatSystem\Combat_With_StatSystem.vcxproj" on node 2 (Build target(s)).
+﻿Build started 11/20/2014 10:09:13 AM.
+     1>Project "C:\Users\5003366\Desktop\Combat_With_StatSystem\Combat_With_StatSystem\Combat_With_StatSystem.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt engine_funcs.cpp input.cpp
-         input.cpp
-     1>c:\users\5003366\desktop\github\cheryl\modules\combat_with_statsystem\combat_with_statsystem\input.cpp(31): warning C4018: '<' : signed/unsigned mismatch
-         engine_funcs.cpp
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(83): warning C4244: '=' : conversion from '__int64' to 'int', possible loss of data
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(80): warning C4101: 'clock' : unreferenced local variable
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(292): warning C4101: 'exception' : unreferenced local variable
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(304): warning C4101: 'exception' : unreferenced local variable
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(316): warning C4101: 'exception' : unreferenced local variable
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(326): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(342): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(362): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(367): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(373): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(421): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\5003366\desktop\github\cheryl\libraries\debug_toolset.h(431): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Player.cpp
+         Player.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\5003366\Desktop\GitHub\Cheryl\Modules\Combat_With_StatSystem\Debug\Combat_With_StatSystem.exe" /INCREMENTAL /NOLOGO opengl32.lib blit3d_debug.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\5003366\Desktop\GitHub\Cheryl\Modules\Combat_With_StatSystem\Debug\Combat_With_StatSystem.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\5003366\Desktop\GitHub\Cheryl\Modules\Combat_With_StatSystem\Debug\Combat_With_StatSystem.lib" /MACHINE:X86 Debug\Combat.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\5003366\Desktop\Combat_With_StatSystem\Debug\Combat_With_StatSystem.exe" /INCREMENTAL /NOLOGO opengl32.lib blit3d_debug.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\5003366\Desktop\Combat_With_StatSystem\Debug\Combat_With_StatSystem.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\5003366\Desktop\Combat_With_StatSystem\Debug\Combat_With_StatSystem.lib" /MACHINE:X86 Debug\Combat.obj
          Debug\engine_funcs.obj
          Debug\input.obj
          Debug\items.obj
          Debug\Main.obj
          Debug\Player.obj
          Debug\Stat_System.obj
-         Combat_With_StatSystem.vcxproj -> C:\Users\5003366\Desktop\GitHub\Cheryl\Modules\Combat_With_StatSystem\Debug\Combat_With_StatSystem.exe
-     1>Done Building Project "C:\Users\5003366\Desktop\GitHub\Cheryl\Modules\Combat_With_StatSystem\Combat_With_StatSystem\Combat_With_StatSystem.vcxproj" (Build target(s)).
+         Combat_With_StatSystem.vcxproj -> C:\Users\5003366\Desktop\Combat_With_StatSystem\Debug\Combat_With_StatSystem.exe
+     1>Done Building Project "C:\Users\5003366\Desktop\Combat_With_StatSystem\Combat_With_StatSystem\Combat_With_StatSystem.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.34
+Time Elapsed 00:00:00.83
