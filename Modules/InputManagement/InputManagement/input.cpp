@@ -2,28 +2,28 @@
 
 void input_mgr::Run_Action(int key_input_value)
 {
-	Lock();
+	Map_mutex.lock();
 	(Key_Action_Map.find(key_input_value))->second();
-	Unlock();
+	Map_mutex.unlock();
 }
 
 void input_mgr::Register_Action(int key_input_value, std::function<void()> action)
 {
-	Lock();
+	Map_mutex.lock();
 	Key_Action_Map[key_input_value] = action;
-	Unlock();
+	Map_mutex.unlock();
 }
 
 void input_mgr::Add(int key_input_value)
 {
-	Lock();
+	inputQ_mutex.lock();
 	input_list.push_back(key_input_value);
-	Unlock();
+	inputQ_mutex.unlock();
 }
 
 void input_mgr::Remove(int key_input_value)
 {
-	Lock();
+	inputQ_mutex.lock();
 	for ( int i = 0; i < input_list.size(); ++i )
 	{
 		if ( key_input_value == input_list[i] )
@@ -31,30 +31,20 @@ void input_mgr::Remove(int key_input_value)
 			input_list.erase(input_list.begin() + i);
 		}
 	}
-	Unlock();
+	inputQ_mutex.unlock();
 }
 
 void input_mgr::ProcessQueue()
 {
 	do
 	{
-		Lock();
+		inputQ_mutex.lock();
 		for ( auto key_queued : input_list )
 		{
 			Run_Action(key_queued);
 		}
-		Unlock();
+		inputQ_mutex.unlock();
 	} while ( thread_running );
-}
-
-void input_mgr::Lock()
-{
-	input_mutex.lock();
-}
-
-void input_mgr::Unlock()
-{
-	input_mutex.unlock();
 }
 
 void input_mgr::MouseInput()
