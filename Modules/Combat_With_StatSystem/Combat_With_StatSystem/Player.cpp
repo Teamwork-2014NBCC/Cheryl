@@ -174,17 +174,20 @@ void Player::Equipitem(items* newItem)
 
 }
 
-//int Player::GetBaseDamage(int damagedealt)
-//{
-//
-//	damagedealt = damage;
-//	return damagedealt;
-//}
-//
-//void Player::AdjustPlayerHealth(int damagedealt)
-//{
-//	health = health - damagedealt;
-//
-//	std::cout << health << std::endl;
-//
-//}
+int Player::getDodgeChance()
+{
+	return 0;
+}
+
+
+int Player::getHitChance()
+{
+	int tempHitChance;
+
+	tempHitChance = hitChance - spd;
+
+	tempHitChance = rand() % tempHitChance + spd;
+
+	return tempHitChance;
+}
+

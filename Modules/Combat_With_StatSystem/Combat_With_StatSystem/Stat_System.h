@@ -24,6 +24,10 @@ protected:
 	int expToLevel = 100;				//Exp to next level
 	int statPoints = 0;					//Stat points per level
 	int abilityPoints = 0;				//Ability points per however many levels.
+	int x;
+	int y;
+
+	
 
 
 
@@ -50,6 +54,14 @@ public:
 
 class base_game_entity : public Stat_System
 {
+private:
+	int x;
+	int y;
+
+public:
+	int getX();
+	int getY();
+
 };
 
 #endif STAT_SYSTEM_H

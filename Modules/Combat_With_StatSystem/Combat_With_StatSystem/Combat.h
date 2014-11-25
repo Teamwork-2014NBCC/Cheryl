@@ -8,6 +8,8 @@ class Combat
 {
 private:
 	Player *player = nullptr;
+	base_game_entity *target = nullptr;
+
 	
 public:
 	int damagedealt;
@@ -19,12 +21,13 @@ public:
 
 	bool inRange;
 	bool evade;
+	bool Target;
 	
 	void Basic_Attack();
 	void Special_Attack();
 	void SetTarget(base_game_entity* target);
 	bool Evade();
-	bool InRange(); 
+	bool InRange();
 	std::string GetSkillUsed();
 	void doCombat();
 
