@@ -3,7 +3,6 @@
 
 #include <blit3d/Blit3D.h>
 
-#include <string>
 #include <fstream>
 #include <stdio.h>
 #include <conio.h>

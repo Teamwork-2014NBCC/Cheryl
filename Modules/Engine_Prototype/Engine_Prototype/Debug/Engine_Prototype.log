@@ -1,29 +1,107 @@
-﻿Build started 11/20/2014 10:02:36 AM.
+﻿Build started 11/25/2014 10:27:22 AM.
      1>Project "C:\Users\1043468\Desktop\Project Programming\Engine_Prototype\Engine_Prototype\Engine_Prototype.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Combat.cpp Player.cpp Stat_System.cpp engine_funcs.cpp input.cpp items.cpp main.cpp
-         Player.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BFont.cpp Font_Handler.cpp engine_funcs.cpp main.cpp
          main.cpp
-         items.cpp
-         input.cpp
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.h(7): error C2011: 'BFont' : 'class' type redefinition
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
          engine_funcs.cpp
-         Stat_System.cpp
-         Combat.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\1043468\Desktop\Project Programming\Engine_Prototype\Debug\Engine_Prototype.exe" /INCREMENTAL /NOLOGO blit3d_debug.lib opengl32.lib glu32.lib glew32.lib glfw3.lib freeimage.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\1043468\Desktop\Project Programming\Engine_Prototype\Debug\Engine_Prototype.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\1043468\Desktop\Project Programming\Engine_Prototype\Debug\Engine_Prototype.lib" /MACHINE:X86 Debug\Combat.obj
-         Debug\engine_funcs.obj
-         Debug\input.obj
-         Debug\items.obj
-         Debug\main.obj
-         Debug\Player.obj
-         Debug\S3DMesh.obj
-         Debug\Stat_System.obj
-         Debug\texture_mgr.obj
-         Engine_Prototype.vcxproj -> C:\Users\1043468\Desktop\Project Programming\Engine_Prototype\Debug\Engine_Prototype.exe
-     1>Done Building Project "C:\Users\1043468\Desktop\Project Programming\Engine_Prototype\Engine_Prototype\Engine_Prototype.vcxproj" (Build target(s)).
+     1>c:\libraries\debug_toolset.h(83): warning C4244: '=' : conversion from '__int64' to 'int', possible loss of data
+     1>c:\libraries\debug_toolset.h(80): warning C4101: 'clock' : unreferenced local variable
+     1>c:\libraries\debug_toolset.h(292): warning C4101: 'exception' : unreferenced local variable
+     1>c:\libraries\debug_toolset.h(304): warning C4101: 'exception' : unreferenced local variable
+     1>c:\libraries\debug_toolset.h(316): warning C4101: 'exception' : unreferenced local variable
+     1>c:\libraries\debug_toolset.h(326): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\libraries\debug_toolset.h(342): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\libraries\debug_toolset.h(362): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\libraries\debug_toolset.h(367): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\libraries\debug_toolset.h(373): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\libraries\debug_toolset.h(421): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\libraries\debug_toolset.h(431): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.h(7): error C2011: 'BFont' : 'class' type redefinition
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+         Font_Handler.cpp
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.h(7): error C2011: 'BFont' : 'class' type redefinition
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\font_handler.cpp(12): error C2027: use of undefined type 'BFont'
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\font_handler.cpp(12): error C2227: left of '->DrawTextW' must point to class/struct/union/generic type
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\font_handler.cpp(57): warning C4150: deletion of pointer to incomplete type 'BFont'; no destructor called
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+         BFont.cpp
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.h(7): error C2011: 'BFont' : 'class' type redefinition
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C2027: use of undefined type 'BFont'
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C2146: syntax error : missing ')' before identifier 'TextureFileName'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C2146: syntax error : missing ';' before identifier 'TextureFileName'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C2079: 'std::string' uses undefined class 'BFont'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C2377: 'std::string' : redefinition; typedef cannot be overloaded with any other symbol
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\xstring(2643) : see declaration of 'std::string'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C2146: syntax error : missing ';' before identifier 'widths_file'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C2086: 'int std::string' : redefinition
+                 c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5) : see declaration of 'std::string'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C2062: type 'float' unexpected
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(5): error C2059: syntax error : ')'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(6): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(6): error C2447: '{' : missing function header (old-style formal list?)
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(114): error C2027: use of undefined type 'BFont'
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(114): error C2061: syntax error : identifier 'string'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(116): error C2065: 'dest_x' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(117): error C2065: 'dest_y' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(119): error C2065: 'vaoId' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(122): error C2065: 'texManager' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(122): error C2227: left of '->BindTexture' must point to class/struct/union/generic type
+                 type is 'unknown-type'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(122): error C2065: 'texId' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(125): error C2065: 'modelMatrix' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(125): error C2065: 'dest_x' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(125): error C2065: 'dest_y' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(125): error C2780: 'glm::detail::tmat4x4<T> glm::gtc::matrix_transform::translate(const glm::detail::tmat4x4<T> &,const glm::detail::tvec3<T> &)' : expects 2 arguments - 1 provided
+                 c:\libraries\college\glm\gtc\matrix_transform.hpp(34) : see declaration of 'glm::gtc::matrix_transform::translate'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(126): error C2065: 'modelMatrix' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(126): error C2065: 'angle' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(129): error C2065: 'prog' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(129): error C2227: left of '->setUniform' must point to class/struct/union/generic type
+                 type is 'unknown-type'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(129): error C2065: 'alpha' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(132): error C2065: 'prog' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(132): error C2227: left of '->setUniform' must point to class/struct/union/generic type
+                 type is 'unknown-type'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(132): error C2065: 'modelMatrix' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(133): error C2065: 'prog' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(133): error C2227: left of '->setUniform' must point to class/struct/union/generic type
+                 type is 'unknown-type'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(136): error C2065: 'fontSize' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(137): error C2065: 'output' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(137): error C2228: left of '.size' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(139): error C2065: 'output' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(143): error C2065: 'modelMatrix' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(143): error C2065: 'widths' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(144): error C2065: 'prog' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(144): error C2227: left of '->setUniform' must point to class/struct/union/generic type
+                 type is 'unknown-type'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(144): error C2065: 'modelMatrix' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(153): error C2027: use of undefined type 'BFont'
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(153): error C2061: syntax error : identifier 'string'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(158): error C2065: 'fontSize' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(159): error C2065: 'output' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(159): error C2228: left of '.size' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(161): error C2065: 'output' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(165): error C2065: 'widths' : undeclared identifier
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(171): error C2027: use of undefined type 'BFont'
+                 c:\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(171): error C2062: type 'void' unexpected
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(172): error C2143: syntax error : missing ';' before '{'
+     1>c:\users\1043468\desktop\project programming\engine_prototype\engine_prototype\bfont.cpp(172): error C2447: '{' : missing function header (old-style formal list?)
+         Generating Code...
+     1>Done Building Project "C:\Users\1043468\Desktop\Project Programming\Engine_Prototype\Engine_Prototype\Engine_Prototype.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:00.76
+Time Elapsed 00:00:03.44

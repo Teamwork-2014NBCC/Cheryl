@@ -34,12 +34,15 @@
     <Filter Include="Source Files\Mesh Loader">
       <UniqueIdentifier>{c633a411-8985-4a54-a10c-367d25786ef6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Font Handler">
+      <UniqueIdentifier>{41413089-921a-44a0-a691-609ce4f9f2bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Font Handler">
+      <UniqueIdentifier>{6fd86bf2-73c3-4d07-b35a-d0a28b4066f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Combat.h">
-      <Filter>Header Files\Combat</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
       <Filter>Header Files\Combat</Filter>
     </ClInclude>
     <ClInclude Include="global.h">
@@ -63,12 +66,18 @@
     <ClInclude Include="S3DMesh.h">
       <Filter>Header Files\Mesh Loader</Filter>
     </ClInclude>
+    <ClInclude Include="Font_Handler.h">
+      <Filter>Header Files\Font Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BFont.h">
+      <Filter>Header Files\Texture Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Combat.cpp">
-      <Filter>Source Files\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="engine_funcs.cpp">
       <Filter>Source Files\Combat</Filter>
     </ClCompile>
     <ClCompile Include="input.cpp">
@@ -91,6 +100,15 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Font_Handler.cpp">
+      <Filter>Source Files\Font Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="engine_funcs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BFont.cpp">
+      <Filter>Source Files\Texture Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

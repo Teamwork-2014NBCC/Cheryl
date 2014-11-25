@@ -70,8 +70,7 @@ inline void game::Init()
 
 
 	//load a font set
-	bfont = nullptr;
-	//assert(bfont != NULL); //make sure it loaded
+	font = new Font_Handler(get_blit3d(),48.0f);
 
 	this->player = new Player();
 	this->combat = new Combat(player);
@@ -126,6 +125,8 @@ inline void game::DeInit(void)
 	delete get_blit3d();
 	dbg::FileLog_Mgr::Stop();
 
+	delete font;
+
 	delete mesh_Cannon;
 	delete mesh_Hull;
 	delete mesh_Turret;
@@ -139,7 +140,8 @@ inline void game::Update(double& seconds)
 	// Instruct the world to perform a single step of simulation.
 	// It is generally best to keep the time step and iterations fixed.
 	angle = angle + static_cast<float>(seconds)* 30;
-	while (angle > 360) angle = angle - 360;
+	while (angle > 360)	angle = angle - 360;
+	font->ChangeFontSize(angle / 3);
 
 	mesh_Cannon->Update(seconds);
 	mesh_Hull->Update(seconds);
@@ -158,6 +160,7 @@ inline void game::Draw(void)
 	//draw sprites, from front to back
 	get_blit3d()->SetMode(Blit3DRenderMode::BLIT3D);
 
+	font->Write(false, 22, 45, "pooping out my nipples!");
 
 	glm::vec3 LightIntensity = glm::vec3(1.0f, 1.0f, 1.0f);
 	prog->setUniform("LightIntensity", LightIntensity);
@@ -196,10 +199,6 @@ inline void game::Draw(void)
 	glBindVertexArray(0);//turn off vao again
 
 	glClear(GL_DEPTH_BUFFER_BIT);
-	//usually want to draw text last
-	//std::string text = "Blit3D 2D sprite example.";
-	//float textWidth = bfont->WidthText(false, text.c_str());
-	//bfont->DrawText(false, get_blit3d()->screenWidth - 20 - textWidth, 50, text.c_str());
 }
 
 //the key codes/actions/mods for DoInput are from GLFW: check its documentation for their values

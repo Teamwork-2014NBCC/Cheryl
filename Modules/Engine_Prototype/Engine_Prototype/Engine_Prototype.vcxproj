@@ -41,8 +41,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\1043468\Desktop\Project Programming\Cheryl\Libraries\college\;C:\Users\1043468\Desktop\Project Programming\Cheryl\Libraries;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
-    <LibraryPath>C:\Users\1043468\Desktop\Project Programming\Cheryl\Libraries\$lib;C:\Users\1043468\Desktop\Project Programming\Cheryl\Libraries\college;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -81,7 +79,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BFont.h" />
     <ClInclude Include="Combat.h" />
+    <ClInclude Include="Font_Handler.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="input.h" />
@@ -92,8 +92,10 @@
     <ClInclude Include="texture_mgr.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BFont.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="engine_funcs.cpp" />
+    <ClCompile Include="Font_Handler.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="items.cpp" />
     <ClCompile Include="main.cpp" />

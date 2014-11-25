@@ -11,12 +11,13 @@
 #include "Stat_System.h"
 #include "Combat.h"
 #include "S3DMesh.h"
+#include "Font_Handler.h"
 
 
 class game
 {
 private:
-	BFont *bfont = nullptr;
+	Font_Handler *font = nullptr;
 	Combat *combat = nullptr;
 	items *newItem = nullptr;
 	Player *player = nullptr;

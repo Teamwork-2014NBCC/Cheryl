@@ -10,12 +10,6 @@
 #define new DEBUG_NEW
 #endif
 
-//
-//string school = "C:/Users/1039652/Documents/Programming Classes/";
-//string home = "D:/All Classes/Programming Classes/";
-//string file1 = "";
-//string file2 = "";
-
 int main(int argc, char *argv[])
 {
 	//the line below turns on memory leak detection in debug mode
