@@ -78,7 +78,7 @@ void input_mgr::MouseInput()
 		{
 			std::cout << "hello" << std::endl;
 
-			combat->B_Attack();
+			combat->Basic_Attack();
 		}
 	}
 }

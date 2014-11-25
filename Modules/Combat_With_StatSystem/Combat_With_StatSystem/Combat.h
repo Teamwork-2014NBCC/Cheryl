@@ -20,8 +20,8 @@ public:
 	bool inRange;
 	bool evade;
 	
-	void B_Attack();
-	void S_Attack();
+	void Basic_Attack();
+	void Special_Attack();
 	void SetTarget(base_game_entity* target);
 	bool Evade();
 	bool InRange(); 

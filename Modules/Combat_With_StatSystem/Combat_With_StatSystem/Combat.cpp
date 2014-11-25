@@ -5,7 +5,7 @@ Combat::Combat(Player *player)
 {
 
 }
-void Combat::B_Attack()
+void Combat::Basic_Attack()
 {
 
 	//calls SetTarget()
@@ -13,7 +13,7 @@ void Combat::B_Attack()
 
 }
 
-void Combat::S_Attack()
+void Combat::Special_Attack()
 {
 
 	//requires abilities
