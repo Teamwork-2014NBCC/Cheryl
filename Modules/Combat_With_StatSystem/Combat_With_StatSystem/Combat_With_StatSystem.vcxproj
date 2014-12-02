@@ -82,6 +82,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Combat.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemy_Mgr.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="input.h" />

@@ -54,7 +54,7 @@ public:
 
 class base_game_entity : public Stat_System
 {
-private:
+protected:
 	int x;
 	int y;
 

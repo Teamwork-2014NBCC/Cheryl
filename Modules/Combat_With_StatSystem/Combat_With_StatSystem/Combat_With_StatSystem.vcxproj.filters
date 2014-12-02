@@ -71,5 +71,11 @@
     <ClInclude Include="Stat_System.h">
       <Filter>Header Files\Game Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_Mgr.h">
+      <Filter>Header Files\Game Systems</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
