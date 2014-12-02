@@ -41,6 +41,7 @@ void **Matrix2D(int ncols, int  nrows, int element_size, int first_row = 0, int 
 
 unsigned char **thebuilder::generate(maze_specs& gen_size)
 {
+REDOGENERATION:
 	int& x = gen_size.first;
 	int& y = gen_size.second;
 	x = x % 2 ? x : x + 1;
@@ -190,6 +191,11 @@ unsigned char **thebuilder::generate(maze_specs& gen_size)
 	LOGFILE1(logINFO) << "About to start building!! Hard Hats on :3";
 	while ( Cartographer.Count() != Area )
 	{
+		if ( Cartographer.Count() > 4 && current_path.size() == 0 )
+		{
+			Cartographer.Reset();
+			goto REDOGENERATION;
+		}
 		//LOGFILE1(logINFO) << "Draw state of maze (aka draw maze to screen)";
 		//draw(maze, size, position);
 		LOGFILE1(logINFO) << "About to start building a path";

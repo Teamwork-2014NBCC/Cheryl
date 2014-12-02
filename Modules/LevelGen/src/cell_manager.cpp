@@ -55,3 +55,13 @@ int cell_mgr::Count()
 	LOGFILE1(logDEBUG1) << "Cartographer:\t Total Cells Visited: " << Cells_Visited;
 	return Cells_Visited;
 }
+
+void cell_mgr::Reset()
+{
+	Cells_Visited = 0;
+	Cells.clear();
+	while ( !Q_Branch.empty() )
+	{
+		Q_Branch.pop();
+	}
+}
