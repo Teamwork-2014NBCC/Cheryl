@@ -26,8 +26,7 @@ void Combat::doCombat()
 {
 	if (!InRange())
 	{
-		
-
+		damagedealt = 0;
 	}
 	else
 	{
@@ -58,7 +57,7 @@ bool Combat::InRange()
 	//check four states of if
 	if ((deltaX == 1) ^ (deltaY == 1))
 	{
-
+		return true;
 	}
 	
 	return false;
@@ -66,14 +65,13 @@ bool Combat::InRange()
 
 bool Combat::Evade()
 {
-	player->getHitChance();
 
-	if (player->getHitChance()/* > enemy dodgechance*/)
+	if (player->getHitChance()/* > enemy->dodgechance()*/)
 	{
-		return true;
+		return false;
 	}
 	else
-		return false;
+		return true;
 
 
 }

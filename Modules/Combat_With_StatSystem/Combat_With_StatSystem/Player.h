@@ -30,8 +30,6 @@ public:
 	int getPhysicalSkillDamage();
 	int getMagicSkillDamage();
 	int getDamageReduction();
-	int getHealth();
-	int setHealth();
 	int getHitChance();
 	int getDodgeChance();
 
