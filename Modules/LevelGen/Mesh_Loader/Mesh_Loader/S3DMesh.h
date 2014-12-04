@@ -1,7 +1,7 @@
 #ifndef _S3DMESH_H_
 #define _S3DMESH_H_
 
-#include "Blit3D.h"
+#include <blit3d\Blit3D.h>
 
 #include <string>
 #include <fstream>
