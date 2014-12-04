@@ -57,7 +57,7 @@ class dir_lister
 			}
 		}
 
-//*
+/*
 		void Set_Path(wstring path)
 		{
 			if ( (Directory = opendir((char*)path.c_str())) == NULL )
