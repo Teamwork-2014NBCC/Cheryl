@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "game.h"
 #include "global.h"
+#include "Enemy.h"
 
 #ifdef _WIN32
 	#ifdef _DEBUG
@@ -80,6 +81,8 @@ inline void game::Init()
 
 	int RanNum1 = rand() % 6 + 1;
 	int RanNum2 = rand() % 10 + 1;
+	int enemyToGenerate;
+	int EnemyCount = rand() % 10 + 3;
 
 	
 
@@ -90,6 +93,34 @@ inline void game::Init()
 	
 
 	player->Equipitem(newItem);
+
+
+
+	for (int i = 0; i < EnemyCount; ++i)
+	{
+		enemyToGenerate = rand() % 3 + 1;
+
+		switch (enemyToGenerate)
+		{
+			case 1:
+			{
+				Enemy* ant = new Enemy(16, 5, 8, 12);
+				break;
+			}
+			case 2:
+			{
+				Enemy* dog = new Enemy(13, 8, 17, 10);
+				break;
+			}
+			case 3:
+			{
+				Enemy* golem = new Enemy(7, 3, 3, 21);
+				break;
+			}
+			
+		}
+
+	}
 
 	mouseMutex.lock();
 	cx = get_blit3d()->screenWidth / 2;

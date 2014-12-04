@@ -6,6 +6,14 @@
 class Enemy: public base_game_entity
 {
 
+public:
+
+	Enemy(int Str, int Intel, int Spd, int Con);
+
+	void PrintStats(Enemy *e);
+
+
 };
+
 
 #endif
