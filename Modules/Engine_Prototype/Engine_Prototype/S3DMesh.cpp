@@ -1,40 +1,47 @@
 #include "S3DMesh.h"
+#include "global.h"
 
 /****************************************************
 * Import method
 * Imports a S3D file
 * Created by:	Mark Murphy		Date: Oct. 8, 2014
 * Modified by:	Mark Murphy		Date: Oct. 14, 2014
-*****************************************************/
+*****************************************************
 void S3DMesh::Import(std::string fileName)
 {
 	meshName = fileName;
 	std::string line;
-	std::ifstream infile(fileName);
-	if (infile.is_open())
+
+	auto file_map = File_Manager::Get_Files(".s3d");
+	auto file_ref = file_map.find(fileName);
+	if ( file_ref != file_map.end() )
 	{
-		infile >> line;
-		numVerts = atoi(line.c_str());
-		verts = new float[numVerts*8];
-
-		for (int i = 0; i < numVerts * 8; i++)
+		std::ifstream infile(file_ref->second + file_ref->first);
+		if ( infile.is_open() )
 		{
-			infile >> verts[i];
-		}
+			infile >> line;
+			numVerts = atoi(line.c_str());
+			verts = new float[numVerts*8];
 
-		infile >> line;
-		numIndices = atoi(line.c_str());
-		indices = new int[numIndices];
-		for (int i = 0; i < numIndices; i++)
-		{
-			infile >> indices[i];
-		}
+			for ( int i = 0; i < numVerts * 8; i++ )
+			{
+				infile >> verts[i];
+			}
 
-		infile >> line;
-		textureName = line;
-		infile.close();
+			infile >> line;
+			numIndices = atoi(line.c_str());
+			indices = new int[numIndices];
+			for ( int i = 0; i < numIndices; i++ )
+			{
+				infile >> indices[i];
+			}
+
+			infile >> line;
+			textureName = line;
+			infile.close();
+		}
 	}
-}
+}*/
 
 /****************************************************
 * Update method
@@ -50,16 +57,16 @@ void S3DMesh::Update(double milliseconds)
 * Draw method
 * Draws to screen
 * Created by:	Mark Murphy		Date: Oct. 8, 2014
-* Modified by:	Mark Murphy		Date: Oct. 8, 2014
+* Modified by:	Josh Cooper		Date: Dec. 4, 2014
 *****************************************************/
-void S3DMesh::Draw(Blit3D *blit3D, GLSLProgram *prog)
+void S3DMesh::Draw()
 {
 	float time = (float)glfwGetTime();
 
 	glBindVertexArray(vao);
 
 	modelMatrix = glm::mat4(1.f) * translation_Matrix * rotation_Matrix * scale_Matrix;
-	prog = blit3D->sManager->UseShader("shader.vert", "shader.frag");
+	//prog = blit3D->sManager->UseShader("shader.vert", "shader.frag");
 	prog->setUniform("modelMatrix", modelMatrix);
 
 	prog->setUniform("Kd", Kd);
@@ -67,7 +74,7 @@ void S3DMesh::Draw(Blit3D *blit3D, GLSLProgram *prog)
 	prog->setUniform("Ks", Ks);
 	prog->setUniform("Shininess", Shininess);
 
-	blit3D->tManager->BindTexture(GetTextureName());
+	get_blit3d()->tManager->BindTexture(GetTextureName());
 	// draw points 0-4 from the currently bound VAO with current in-use shader
 	if (bStripped) glDrawElements(GL_TRIANGLE_STRIP, numIndices, GL_UNSIGNED_INT, BUFFER_OFFSET(0));
 	else glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, BUFFER_OFFSET(0));
@@ -123,14 +130,22 @@ std::string S3DMesh::GetTextureName()
 * S3DMesh constructer
 * Sets initial values
 * Created by:	Mark Murphy		Date: Oct. 8, 2014
-* Modified by:	Mark Murphy		Date: Nov. 13, 2014
+* Modified by:	Josh Cooper		Date: Dec. 4, 2014
 *****************************************************/
-S3DMesh::S3DMesh(std::string fileName, Blit3D *blit3D, GLSLProgram *prog, bool isStripped)
+S3DMesh::S3DMesh( Texture_Manager& txt_mgr, GLSLProgram* prog, mesh_data info, bool isStripped)
 {
-	modelMatrix = glm::mat4(1.f);
-	Import(fileName);
+	this->prog = prog;
+
+	numVerts = info.numVerts;
+	numIndices = info.numIndices;
+	verts = info.verts;
+	indices = info.indices;
+	textureName = info.textureName;
+
 	bStripped = isStripped;
 
+	modelMatrix = glm::mat4(1.f);
+	
 	// tell GL to only draw onto a pixel if the shape is closer to the viewer
 	glEnable(GL_DEPTH_TEST); // enable depth-testing
 	glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
@@ -177,17 +192,18 @@ S3DMesh::S3DMesh(std::string fileName, Blit3D *blit3D, GLSLProgram *prog, bool i
 
 
 	//send alpha to the shader
-	prog->setUniform("in_Alpha", 1.f);
+	this->prog->setUniform("in_Alpha", 1.f);
 
 	//attributes
-	prog->bindAttribLocation(0, "in_Position");
-	prog->bindAttribLocation(1, "in_Normal");
-	prog->bindAttribLocation(2, "in_Texcoord");
+	this->prog->bindAttribLocation(0, "in_Position");
+	this->prog->bindAttribLocation(1, "in_Normal");
+	this->prog->bindAttribLocation(2, "in_Texcoord");
+	
+	this->prog->printActiveUniforms();
+	this->prog->printActiveAttribs();
 
-	prog->printActiveUniforms();
-	prog->printActiveAttribs();
-
-	blit3D->tManager->LoadTexture(GetTextureName(), true);
+	texID = txt_mgr.GetID(textureName);
+	
 
 	//enable blending
 	glEnable(GL_BLEND);

@@ -10,19 +10,21 @@
 #include "Player.h"
 #include "Stat_System.h"
 #include "Combat.h"
-#include "S3DMesh.h"
+#include "mesh_mgr.h"
 #include "Font_Handler.h"
 
 
 class game
 {
 private:
+	S3DMesh_Manager mesh_mgr;
+	input_mgr KeyInput_Mgr;
+
 	Font_Handler *font = nullptr;
 	Combat *combat = nullptr;
 	items *newItem = nullptr;
 	Player *player = nullptr;
 	Stat_System *stat_System = nullptr;
-	input_mgr Input_Mgr;
 	std::mutex mouseMutex;
 	float cx, cy;
 

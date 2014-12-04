@@ -3,9 +3,14 @@
 
 #include <blit3d/Blit3D.h>
 
+#include <string>
 #include <fstream>
 #include <stdio.h>
 #include <conio.h>
+#include <atomic>
+#include "texture_mgr.h"
+//#include "file_mgr.h"
+
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -16,15 +21,44 @@ extern GLFWwindow* window;
 //glm::mat4 modelMatrix;
 
 
+struct mesh_data
+{
+	int numVerts = 0;
+	int numIndices = 0;
+	float* verts = nullptr;
+	int* indices = nullptr;
+	std::string textureName;
+
+	mesh_data(int nv, int ni, float* verts, int* indices, std::string tx)
+	{
+		numVerts = nv;
+		numIndices = ni;
+		this->verts = verts;
+		this->indices = indices;
+		textureName = tx;
+	}
+	mesh_data(const mesh_data& ref)
+	{
+		numVerts = ref.numVerts;
+		numIndices = ref.numIndices;
+		this->verts = ref.verts;
+		this->indices = ref.indices;
+		textureName = ref.textureName;
+	}
+};
+
+
 /******************************************************
 * S3DMesh Class
-* Imports S3D file and stores the information withing the class.
+* Stores the S3D information within the class.
 * Created by:	Mark Murphy		Date:	Oct. 8, 2014
-* Modified by:	Mark Murphy		Date:	Nov. 13, 2014
+* Modified by:	Josh Cooper		Date:	Dec. 4, 2014
 *******************************************************/
 class S3DMesh
 {
 private:
+	GLSLProgram *prog = nullptr;
+
 	glm::vec3 Kd; //diffuse reflectivity
 	glm::vec3 Ka; //ambient reflectivity
 	glm::vec3 Ks; //Specular reflectivity
@@ -33,15 +67,17 @@ private:
 	GLuint vbo[2];
 	GLuint vao = 0;
 
-	std::string meshName;
-	std::string textureName;
+	
+	texid texID;
 
 	bool bStripped;
 
-	int numVerts;
-	int numIndices;
-	float* verts;
-	int* indices;
+	mesh_data info;
+	int		&numVerts = info.numVerts;
+	int		&numIndices = info.numIndices;
+	float*	&verts = info.verts;
+	int*		&indices = info.indices;
+	std::string &textureName = info.textureName;
 
 	glm::mat4 modelMatrix;
 	glm::mat4 rotation_Matrix;
@@ -51,14 +87,14 @@ private:
 public:
 	void Import(std::string fileName);
 	void Update(double milliseconds);
-	void Draw(Blit3D *blit3D, GLSLProgram *prog);
+	void Draw();
 
 	void Transform(float x, float y, float z);
 	void Rotate(float angle, float x, float y, float z);
 	void Scale(float x, float y, float z);
 	std::string GetTextureName();
 
-	S3DMesh(std::string fileName, Blit3D *blit3D, GLSLProgram *prog, bool isStripped);
+	S3DMesh( Texture_Manager& txt_mgr, GLSLProgram* prog, mesh_data info, bool isStripped = true);
 	~S3DMesh();
 };
 

@@ -108,12 +108,12 @@ inline void game::Init()
 	prog->setUniform("projectionMatrix", get_blit3d()->projectionMatrix);
 	prog->setUniform("viewMatrix", get_blit3d()->viewMatrix);
 
-	mesh_Cannon = new S3DMesh("APC_Cannon.S3D", get_blit3d(), prog, false);
-	mesh_Hull = new S3DMesh("APC_Hull.S3D", get_blit3d(), prog, false);
-	mesh_Turret = new S3DMesh("APC_Turret.S3D", get_blit3d(), prog, false);
-	mesh_Wheel = new S3DMesh("APC_Wheel.S3D", get_blit3d(), prog, false);
-	mesh_Box = new S3DMesh("box.S3D", get_blit3d(), prog, true);
-	mesh_Golem = new S3DMesh("golem.S3D", get_blit3d(), prog, true);
+	mesh_Cannon = mesh_mgr.Import_S3D_File("APC_Cannon.S3D");
+	mesh_Hull = mesh_mgr.Import_S3D_File("APC_Hull.S3D");
+	mesh_Turret = mesh_mgr.Import_S3D_File("APC_Turret.S3D");
+	mesh_Wheel = mesh_mgr.Import_S3D_File("APC_Wheel.S3D");
+	mesh_Box = mesh_mgr.Import_S3D_File("box.S3D");
+	mesh_Golem = mesh_mgr.Import_S3D_File("golem.S3D");
 
 	get_blit3d()->projectionMatrix *= glm::perspective(45.0f, (GLfloat)(get_blit3d()->screenWidth) / (GLfloat)(get_blit3d()->screenHeight), 0.1f, 10000.0f);
 }
@@ -122,17 +122,17 @@ inline void game::DeInit(void)
 {
 	delete stat_System;
 	delete newItem;
-	delete get_blit3d();
-	dbg::FileLog_Mgr::Stop();
-
-	delete font;
-
+	
 	delete mesh_Cannon;
 	delete mesh_Hull;
 	delete mesh_Turret;
 	delete mesh_Wheel;
 	delete mesh_Box;
 	delete mesh_Golem;
+
+	delete font;
+
+	dbg::FileLog_Mgr::Stop();
 }
 
 inline void game::Update(double& seconds)
@@ -189,12 +189,12 @@ inline void game::Draw(void)
 	mesh_Golem->Transform(0, 0, -30.0f);
 	mesh_Golem->Rotate((float)angle, 1.0f, 1.0f, 1.0f);
 
-	mesh_Cannon->Draw(get_blit3d(), prog);
-	mesh_Hull->Draw(get_blit3d(), prog);
-	mesh_Turret->Draw(get_blit3d(), prog);
-	mesh_Wheel->Draw(get_blit3d(), prog);
-	mesh_Box->Draw(get_blit3d(), prog);
-	mesh_Golem->Draw(get_blit3d(), prog);
+	mesh_Cannon->Draw();
+	mesh_Hull->Draw();
+	mesh_Turret->Draw();
+	mesh_Wheel->Draw();
+	mesh_Box->Draw();
+	mesh_Golem->Draw();
 
 	glBindVertexArray(0);//turn off vao again
 
@@ -204,13 +204,13 @@ inline void game::Draw(void)
 //the key codes/actions/mods for DoInput are from GLFW: check its documentation for their values
 inline void game::DoInput(int& key, int& scancode, int& action, int& mods)
 {
-	if ( action == 1 )
+	if ( action == GLFW_PRESS )
 	{
-		Input_Mgr.Add(key);
+		KeyInput_Mgr.Add(key);
 	}
-	else if ( action == 0 )
+	else if ( action == GLFW_RELEASE )
 	{
-		Input_Mgr.Remove(key);
+		KeyInput_Mgr.Remove(key);
 	}
 }
 
