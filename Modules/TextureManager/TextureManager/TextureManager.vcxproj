@@ -75,6 +75,7 @@
     <ClInclude Include="..\..\..\..\..\..\..\src\Libraries\college\Blit3Dv0.12\glutils.h" />
     <ClInclude Include="..\..\..\..\..\..\..\src\Libraries\college\Blit3Dv0.12\ShaderManager.h" />
     <ClInclude Include="..\..\..\..\..\..\..\src\Libraries\college\Blit3Dv0.12\TextureManager.h" />
+    <ClInclude Include="file_mgr.h" />
     <ClInclude Include="texture_mgr.h" />
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +85,7 @@
     <ClCompile Include="..\..\..\..\..\..\..\src\Libraries\college\Blit3Dv0.12\main.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\src\Libraries\college\Blit3Dv0.12\ShaderManager.cpp" />
     <ClCompile Include="..\..\..\..\..\..\..\src\Libraries\college\Blit3Dv0.12\TextureManager.cpp" />
+    <ClCompile Include="file_util.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="texture_mgr.cpp" />
   </ItemGroup>

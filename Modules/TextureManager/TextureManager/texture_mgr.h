@@ -16,8 +16,10 @@
 #include <unordered_set>
 #include <map>
 
+//Project
+#include "file_mgr.h"
+
 using texid = GLuint;
-extern std::wstring execution_path;
 
 namespace coope
 {
@@ -29,44 +31,6 @@ namespace coope
 		unsigned int width, height;
 	};
 }
-
-class File_Manager
-{
-	private:
-		static dir_lister& Get()
-		{
-			static dir_lister Singleton_Dir_Lister;
-			return Singleton_Dir_Lister;
-		}
-		static std::unordered_set<std::string>& Get_Loaded()
-		{
-			static std::unordered_set<std::string> Singleton_Loaded_List;
-			return Singleton_Loaded_List;
-		}
-
-	protected:
-	public:
-		/*static void Register_Directory(std::wstring path)
-		{
-			if ( Get_Loaded().emplace(path).second )
-			{
-				Get().Set_Path(path);
-				Get().Find_Files();
-			}
-		}*/
-		static void Register_Directory(std::string path)
-		{
-			if ( Get_Loaded().emplace(path).second )
-			{
-				Get().Set_Path(path);
-				Get().Find_Files();
-			}
-		}
-		static stringmap& Get_Files(std::string extension)
-		{
-			return Get().Get_Files_List(extension);
-		}
-};
 
 class Texture_Manager
 {
