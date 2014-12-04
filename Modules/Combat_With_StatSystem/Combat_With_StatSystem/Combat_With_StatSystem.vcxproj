@@ -73,6 +73,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Combat.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="engine_funcs.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="items.cpp" />

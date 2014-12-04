@@ -21,7 +21,7 @@ Player::Player(int statpoints)
 	this->health = calcHealth();
 	this->damageReduction = calcDamageReduction();
 
-	//LevelUp();
+	LevelUp();
 }
 //each level a player gains 5 stat points to add
 //to their character which will adjusts it's damage,health,speed, etc...
@@ -38,7 +38,7 @@ void Player::LevelUp()
 	std::cout << "2.intel = " << intel << std::endl;
 	std::cout << "3.spd = " << spd << std::endl;
 	std::cout << "4.con = " << con << std::endl;
-	std::cout << "\nHealt: " << health << std::endl;
+	std::cout << "\nHealth: " << health << std::endl;
 	std::cout << "Damage: " << damage << std::endl;
 	std::cout << "Damage Reduction: " << damageReduction << std::endl;
 	std::cout << "Magic Damage: " << magicSkillDamage << std::endl;

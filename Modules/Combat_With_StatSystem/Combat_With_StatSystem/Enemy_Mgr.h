@@ -13,7 +13,7 @@ private:
 		return Enemy_List;
 	}
 protected:
-	inline unsigned int hash( int x, int y )
+	/*inline unsigned int hash( int x, int y )
 	{
 		union local_union
 		{
@@ -24,7 +24,7 @@ protected:
 		my_var.myarray[0] = x;
 		my_var.myarray[1] = y;
 		return my_var.R;
-	}
+	}*/
 public:
 	Enemy* Get(int x, int y)
 	{
@@ -37,6 +37,12 @@ public:
 		}
 		return nullptr;
 	}
+	void Add( Enemy* e )
+	{
+		Get_Enemy_List_Instance().push_back( e );
+	}
+
+
 
 };
 

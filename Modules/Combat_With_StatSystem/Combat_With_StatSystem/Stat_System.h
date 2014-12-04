@@ -59,8 +59,14 @@ protected:
 	int y;
 
 public:
-	int getX();
-	int getY();
+	int getX()
+	{
+		return this->x;
+	}
+	int getY()
+	{
+		return this->y;
+	}
 
 };
 
