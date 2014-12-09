@@ -69,9 +69,6 @@
     <ClInclude Include="input.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="BFont.h">
-      <Filter>Header Files\Font</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
@@ -118,9 +115,6 @@
     </ClCompile>
     <ClCompile Include="input.cpp">
       <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="BFont.cpp">
-      <Filter>Source Files\Font</Filter>
     </ClCompile>
     <ClCompile Include="file_util.cpp">
       <Filter>Source Files</Filter>

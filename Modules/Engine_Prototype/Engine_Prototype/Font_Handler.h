@@ -1,7 +1,7 @@
 #ifndef _FONT_HANDLER_H_
 #define _FONT_HANDLER_H_
 
-#include "BFont.h"
+#include <blit3d/Blit3D.h>
 
 class Font_Handler
 {

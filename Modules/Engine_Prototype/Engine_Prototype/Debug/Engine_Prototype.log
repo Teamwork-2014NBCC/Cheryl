@@ -1,100 +1,47 @@
-﻿Build started 12/2/2014 10:32:25 AM.
-     1>Project "D:\All Classes\Programming Classes\Project Management\Cheryl\Modules\Engine_Prototype\Engine_Prototype\Engine_Prototype.vcxproj" on node 2 (Build target(s)).
+﻿Build started 12/9/2014 8:42:30 AM.
+     1>Project "C:\Users\1043468\Desktop\Engine_Prototype\Engine_Prototype\Engine_Prototype.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\VS2013\VC\bin\CL.exe /c /ZI /nologo /W0 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BFont.cpp Combat.cpp engine_funcs.cpp Font_Handler.cpp input.cpp items.cpp main.cpp Player.cpp S3DMesh.cpp Stat_System.cpp texture_mgr.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W0 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Combat.cpp engine_funcs.cpp file_util.cpp Font_Handler.cpp input.cpp items.cpp main.cpp mesh_mgr.cpp Player.cpp S3DMesh.cpp Stat_System.cpp texture_mgr.cpp
          texture_mgr.cpp
+     1>c:\libraries\winfs_tools.h(13): error C2011: 'dir_lister' : 'class' type redefinition
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): error C2027: use of undefined type 'dir_lister'
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): fatal error C1903: unable to recover from previous error(s); stopping compilation
          Stat_System.cpp
          S3DMesh.cpp
+     1>c:\libraries\winfs_tools.h(13): error C2011: 'dir_lister' : 'class' type redefinition
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): error C2027: use of undefined type 'dir_lister'
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): fatal error C1903: unable to recover from previous error(s); stopping compilation
          Player.cpp
+         mesh_mgr.cpp
+     1>c:\libraries\winfs_tools.h(13): error C2011: 'dir_lister' : 'class' type redefinition
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): error C2027: use of undefined type 'dir_lister'
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): fatal error C1903: unable to recover from previous error(s); stopping compilation
          main.cpp
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.h(7): error C2011: 'BFont' : 'class' type redefinition
-                 c:\src\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+     1>c:\libraries\winfs_tools.h(13): error C2011: 'dir_lister' : 'class' type redefinition
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): error C2027: use of undefined type 'dir_lister'
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): fatal error C1903: unable to recover from previous error(s); stopping compilation
          items.cpp
          input.cpp
          Font_Handler.cpp
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.h(7): error C2011: 'BFont' : 'class' type redefinition
-                 c:\src\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\font_handler.cpp(12): error C2027: use of undefined type 'BFont'
-                 c:\src\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\font_handler.cpp(12): error C2227: left of '->DrawTextW' must point to class/struct/union/generic type
+         file_util.cpp
          engine_funcs.cpp
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.h(7): error C2011: 'BFont' : 'class' type redefinition
-                 c:\src\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
+     1>c:\libraries\winfs_tools.h(13): error C2011: 'dir_lister' : 'class' type redefinition
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): error C2027: use of undefined type 'dir_lister'
+                 c:\libraries\winfs_tools.h(13) : see declaration of 'dir_lister'
+     1>c:\users\1043468\desktop\engine_prototype\engine_prototype\file_mgr.h(19): fatal error C1903: unable to recover from previous error(s); stopping compilation
          Combat.cpp
-         BFont.cpp
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.h(7): error C2011: 'BFont' : 'class' type redefinition
-                 c:\src\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C2027: use of undefined type 'BFont'
-                 c:\src\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C2146: syntax error : missing ')' before identifier 'TextureFileName'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C2146: syntax error : missing ';' before identifier 'TextureFileName'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C2079: 'std::string' uses undefined class 'BFont'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C2377: 'std::string' : redefinition; typedef cannot be overloaded with any other symbol
-                 c:\vs2013\vc\include\xstring(2643) : see declaration of 'std::string'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C2146: syntax error : missing ';' before identifier 'widths_file'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C2086: 'int std::string' : redefinition
-                 d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5) : see declaration of 'std::string'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C2062: type 'float' unexpected
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(5): error C2059: syntax error : ')'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(6): error C2143: syntax error : missing ';' before '{'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(6): error C2447: '{' : missing function header (old-style formal list?)
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(114): error C2027: use of undefined type 'BFont'
-                 c:\src\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(114): error C2061: syntax error : identifier 'string'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(116): error C2065: 'dest_x' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(117): error C2065: 'dest_y' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(119): error C2065: 'vaoId' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(122): error C2065: 'texManager' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(122): error C2227: left of '->BindTexture' must point to class/struct/union/generic type
-                 type is 'unknown-type'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(122): error C2065: 'texId' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(125): error C2065: 'modelMatrix' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(125): error C2065: 'dest_x' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(125): error C2065: 'dest_y' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(125): error C2780: 'glm::detail::tmat4x4<T> glm::gtc::matrix_transform::translate(const glm::detail::tmat4x4<T> &,const glm::detail::tvec3<T> &)' : expects 2 arguments - 1 provided
-                 c:\src\libraries\college\glm\gtc\matrix_transform.hpp(34) : see declaration of 'glm::gtc::matrix_transform::translate'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(126): error C2065: 'modelMatrix' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(126): error C2065: 'angle' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(129): error C2065: 'prog' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(129): error C2227: left of '->setUniform' must point to class/struct/union/generic type
-                 type is 'unknown-type'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(129): error C2065: 'alpha' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(132): error C2065: 'prog' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(132): error C2227: left of '->setUniform' must point to class/struct/union/generic type
-                 type is 'unknown-type'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(132): error C2065: 'modelMatrix' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(133): error C2065: 'prog' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(133): error C2227: left of '->setUniform' must point to class/struct/union/generic type
-                 type is 'unknown-type'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(136): error C2065: 'fontSize' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(137): error C2065: 'output' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(137): error C2228: left of '.size' must have class/struct/union
-                 type is 'unknown-type'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(139): error C2065: 'output' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(143): error C2065: 'modelMatrix' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(143): error C2065: 'widths' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(144): error C2065: 'prog' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(144): error C2227: left of '->setUniform' must point to class/struct/union/generic type
-                 type is 'unknown-type'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(144): error C2065: 'modelMatrix' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(153): error C2027: use of undefined type 'BFont'
-                 c:\src\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(153): error C2061: syntax error : identifier 'string'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(158): error C2065: 'fontSize' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(159): error C2065: 'output' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(159): error C2228: left of '.size' must have class/struct/union
-                 type is 'unknown-type'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(161): error C2065: 'output' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(165): error C2065: 'widths' : undeclared identifier
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(171): error C2027: use of undefined type 'BFont'
-                 c:\src\libraries\college\blit3d\bfont.h(13) : see declaration of 'BFont'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(171): error C2062: type 'void' unexpected
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(172): error C2143: syntax error : missing ';' before '{'
-     1>d:\all classes\programming classes\project management\cheryl\modules\engine_prototype\engine_prototype\bfont.cpp(172): error C2447: '{' : missing function header (old-style formal list?)
          Generating Code...
-     1>Done Building Project "D:\All Classes\Programming Classes\Project Management\Cheryl\Modules\Engine_Prototype\Engine_Prototype\Engine_Prototype.vcxproj" (Build target(s)) -- FAILED.
+     1>Done Building Project "C:\Users\1043468\Desktop\Engine_Prototype\Engine_Prototype\Engine_Prototype.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:10.93
+Time Elapsed 00:00:09.91

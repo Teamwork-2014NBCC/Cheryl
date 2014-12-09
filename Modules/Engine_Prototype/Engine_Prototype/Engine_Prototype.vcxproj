@@ -79,7 +79,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BFont.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Mgr.h" />
@@ -96,7 +95,6 @@
     <ClInclude Include="texture_mgr.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BFont.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="engine_funcs.cpp" />
     <ClCompile Include="file_util.cpp" />

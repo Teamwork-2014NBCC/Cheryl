@@ -70,7 +70,8 @@ inline void game::Init()
 
 
 	//load a font set
-	font = new Font_Handler(get_blit3d(),48.0f);
+	this->font = new Font_Handler(get_blit3d(), 48.0f);
+	font->ChangeFontSize(102.0f);
 
 	this->player = new Player();
 	this->combat = new Combat(player);
@@ -141,7 +142,6 @@ inline void game::Update(double& seconds)
 	// It is generally best to keep the time step and iterations fixed.
 	angle = angle + static_cast<float>(seconds)* 30;
 	while (angle > 360)	angle = angle - 360;
-	font->ChangeFontSize(angle / 3);
 
 	mesh_Cannon->Update(seconds);
 	mesh_Hull->Update(seconds);
@@ -197,6 +197,11 @@ inline void game::Draw(void)
 	mesh_Golem->Draw();
 
 	glBindVertexArray(0);//turn off vao again
+
+	get_blit3d()->SetMode(Blit3DRenderMode::BLIT2D);
+
+	font->Write(false, 22, 45, "pooping out my nipples!");
+	font->Write(false, 100, 100, "PoopButt");
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 }
