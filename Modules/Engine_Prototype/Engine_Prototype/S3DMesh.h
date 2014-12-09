@@ -29,6 +29,7 @@ struct mesh_data
 	int* indices = nullptr;
 	std::string textureName;
 
+	mesh_data(){}
 	mesh_data(int nv, int ni, float* verts, int* indices, std::string tx)
 	{
 		numVerts = nv;
@@ -92,7 +93,6 @@ public:
 	void Transform(float x, float y, float z);
 	void Rotate(float angle, float x, float y, float z);
 	void Scale(float x, float y, float z);
-	std::string GetTextureName();
 
 	S3DMesh( Texture_Manager& txt_mgr, GLSLProgram* prog, mesh_data info, bool isStripped = true);
 	~S3DMesh();

@@ -66,12 +66,21 @@ inline void game::Init()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	//load sprites
+	//Register asset directories
+	File_Manager::Register_Directory("C:/Cheryl_Assets/models/");
+	File_Manager::Register_Directory("C:/Cheryl_Assets/textures/");
 
+
+
+	//load Textures
+	txtr_mgr.LoadAll();
+
+	//load Meshes
+	mesh_mgr.Load_All();
 
 	//load a font set
-	this->font = new Font_Handler(get_blit3d(), 48.0f);
-	font->ChangeFontSize(102.0f);
+	//this->font = new Font_Handler(get_blit3d(), 48.0f);
+	//font->ChangeFontSize(102.0f);
 
 	this->player = new Player();
 	this->combat = new Combat(player);
@@ -109,12 +118,14 @@ inline void game::Init()
 	prog->setUniform("projectionMatrix", get_blit3d()->projectionMatrix);
 	prog->setUniform("viewMatrix", get_blit3d()->viewMatrix);
 
-	mesh_Cannon = mesh_mgr.Import_S3D_File("APC_Cannon.S3D");
-	mesh_Hull = mesh_mgr.Import_S3D_File("APC_Hull.S3D");
-	mesh_Turret = mesh_mgr.Import_S3D_File("APC_Turret.S3D");
-	mesh_Wheel = mesh_mgr.Import_S3D_File("APC_Wheel.S3D");
-	mesh_Box = mesh_mgr.Import_S3D_File("box.S3D");
-	mesh_Golem = mesh_mgr.Import_S3D_File("golem.S3D");
+
+	//Get meshes for objects
+	mesh_Cannon = mesh_mgr.Get_Mesh("APC_Cannon.s3d");
+	mesh_Hull = mesh_mgr.Get_Mesh("APC_Hull.s3d");
+	mesh_Turret = mesh_mgr.Get_Mesh("APC_Turret.s3d");
+	mesh_Wheel = mesh_mgr.Get_Mesh("APC_Wheel.s3d");
+	mesh_Box = mesh_mgr.Get_Mesh("box.s3d");
+	mesh_Golem = mesh_mgr.Get_Mesh("golem.s3d");
 
 	get_blit3d()->projectionMatrix *= glm::perspective(45.0f, (GLfloat)(get_blit3d()->screenWidth) / (GLfloat)(get_blit3d()->screenHeight), 0.1f, 10000.0f);
 }
@@ -160,8 +171,6 @@ inline void game::Draw(void)
 	//draw sprites, from front to back
 	get_blit3d()->SetMode(Blit3DRenderMode::BLIT3D);
 
-	font->Write(false, 22, 45, "pooping out my nipples!");
-
 	glm::vec3 LightIntensity = glm::vec3(1.0f, 1.0f, 1.0f);
 	prog->setUniform("LightIntensity", LightIntensity);
 
@@ -200,8 +209,11 @@ inline void game::Draw(void)
 
 	get_blit3d()->SetMode(Blit3DRenderMode::BLIT2D);
 
-	font->Write(false, 22, 45, "pooping out my nipples!");
-	font->Write(false, 100, 100, "PoopButt");
+	if ( font )
+	{
+		font->Write(false, 22, 45, "pooping out my nipples!");
+		font->Write(false, 100, 100, "PoopButt");
+	}
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 }

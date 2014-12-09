@@ -7,7 +7,7 @@ void Texture_Manager::Init()
 {
 	//std::wstring ws(L"ABCD€FG");
 	//std::string s((const char*)&ws[0], sizeof(wchar_t)/sizeof(char)*ws.size());
-	File_Manager::Register_Directory("C:/Users/1039652/Documents/Programming Classes/3D Animation/Cooper - A2/Cooper - A2/");
+	
 	//File_Manager::Register_Directory(execution_path + L"/Textures/HUD/");
 }
 
@@ -37,7 +37,7 @@ void Texture_Manager::LoadTexture(std::string file, std::string path)
 
 	//add the path to the file
 	std::string fullpath;
-	fullpath = fullpath + file;
+	fullpath = path + file;
 	newtex->refcount = 0;
 	newtex->unload = true; //currently setting all textures to unload when refcount = 0;
 
@@ -141,7 +141,7 @@ void Texture_Manager::LoadTexture(std::string file, std::string path)
 
 ERROR_HANDLER:
 #ifdef _WIN32			
-	MessageBox(0, (LPCWSTR)"Free Image loading error!", (LPCWSTR)((file_itor->first).c_str()), MB_OK | MB_ICONEXCLAMATION);
+	MessageBox(0, (LPCWSTR)"Free Image loading error!", (LPCWSTR)((path + file).c_str()), MB_OK | MB_ICONEXCLAMATION);
 #else
 	std::cout << "Free Image loading error while loading: " << filename << std::endl;
 #endif

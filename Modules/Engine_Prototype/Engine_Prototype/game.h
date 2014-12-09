@@ -6,30 +6,34 @@
 #include <atomic>
 #include <mutex>
 
+#include "texture_mgr.h"
+#include "mesh_mgr.h"
+#include "Font_Handler.h"
+
 #include "input.h"
 #include "Player.h"
 #include "Stat_System.h"
 #include "Combat.h"
-#include "mesh_mgr.h"
-#include "Font_Handler.h"
+
 
 
 class game
 {
 private:
-	S3DMesh_Manager mesh_mgr;
 	input_mgr KeyInput_Mgr;
 
+	GLSLProgram *prog = NULL;
 	Font_Handler *font = nullptr;
 	Combat *combat = nullptr;
+
 	items *newItem = nullptr;
 	Player *player = nullptr;
 	Stat_System *stat_System = nullptr;
+
 	std::mutex mouseMutex;
 	float cx, cy;
 
 
-	GLSLProgram *prog = NULL;
 
 	std::atomic<float> angle = 0;
 
@@ -42,6 +46,9 @@ private:
 
 protected:
 public:
+	Texture_Manager txtr_mgr;
+	S3DMesh_Manager mesh_mgr;
+
 	void Init();
 	void DeInit();
 	void Update(double& seconds);

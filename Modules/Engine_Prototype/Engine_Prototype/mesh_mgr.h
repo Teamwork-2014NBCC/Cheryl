@@ -15,19 +15,29 @@
 *******************************************************/
 class S3DMesh_Manager
 {
-	Texture_Manager* txt_mgr = nullptr;
 private:
-	std::map<std::string, S3DMesh*> mesh_map;
-	std::map<std::string, S3DMesh*>::iterator mesh_itor;
+	std::map<std::string, std::pair<unsigned int, S3DMesh*>> mesh_map;
+	std::map<std::string, std::pair<unsigned int, S3DMesh*>>::iterator mesh_itor;
 
-	void Load_All(){}
-	void Load_Mesh(std::string file, std::string path){}
-	S3DMesh* Get_Mesh(std::string file_name){ return nullptr; }
 	void Free_Meshes(){}
+	inline S3DMesh* Import_S3D_File(std::string filepath);
 
 public:
-	S3DMesh_Manager(Texture_Manager* txt_mgr);
-	S3DMesh* Import_S3D_File(std::string fileName);
+	~S3DMesh_Manager()
+	{
+		{
+			for ( auto map_pair : mesh_map )
+			{
+				delete map_pair.second.second;
+			}
+		}
+	}
+	void Init();
+	void Load_All();
+	void Load_Mesh(std::string file, std::string path);
+	void Free_Mesh( std::string file_name );
+	S3DMesh* Get_Mesh(std::string file_name);
+
 };
 
 
