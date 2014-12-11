@@ -64,7 +64,7 @@ S3DMesh* S3DMesh_Manager::Import_S3D_File( std::string filepath )
 		textureName = line;
 		infile.close();
 		mesh_data info( numVerts, numIndices, verts, indices, textureName );
-		S3DMesh* mesh = new S3DMesh( get_game_engine().txtr_mgr, get_blit3d()->sManager->UseShader( "shader.vert", "shader.frag" ), info );
+		S3DMesh* mesh = new S3DMesh( get_blit3d()->sManager->UseShader( "shader.vert", "shader.frag" ), info );
 		return mesh;
 	}
 	return nullptr;

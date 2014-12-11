@@ -71,7 +71,6 @@ private:
 	
 	texid texID;
 
-	bool bStripped;
 
 	mesh_data info;
 	int		&numVerts = info.numVerts;
@@ -86,6 +85,7 @@ private:
 	glm::mat4 scale_Matrix;
 
 public:
+	bool bStripped;
 	void Import(std::string fileName);
 	void Update(double milliseconds);
 	void Draw();
@@ -94,7 +94,7 @@ public:
 	void Rotate(float angle, float x, float y, float z);
 	void Scale(float x, float y, float z);
 
-	S3DMesh( Texture_Manager& txt_mgr, GLSLProgram* prog, mesh_data info, bool isStripped = true);
+	S3DMesh( GLSLProgram* prog, mesh_data info, bool isStripped = true);
 	~S3DMesh();
 };
 

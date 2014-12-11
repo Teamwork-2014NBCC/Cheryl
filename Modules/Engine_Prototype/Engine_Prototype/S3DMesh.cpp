@@ -74,7 +74,11 @@ void S3DMesh::Draw()
 	prog->setUniform( "Ks", Ks );
 	prog->setUniform( "Shininess", Shininess );
 
+
+	//get_blit3d()->tManager->BindTexture( textureName );
 	get_game_engine().txtr_mgr.BindTexture( texID );
+
+
 	// draw points 0-4 from the currently bound VAO with current in-use shader
 	if ( bStripped ) glDrawElements( GL_TRIANGLE_STRIP, numIndices, GL_UNSIGNED_INT, BUFFER_OFFSET( 0 ) );
 	else glDrawElements( GL_TRIANGLES, numIndices, GL_UNSIGNED_INT, BUFFER_OFFSET( 0 ) );
@@ -120,7 +124,7 @@ void S3DMesh::Scale( float x, float y, float z )
 * Created by:	Mark Murphy		Date: Oct. 8, 2014
 * Modified by:	Josh Cooper		Date: Dec. 4, 2014
 *****************************************************/
-S3DMesh::S3DMesh( Texture_Manager& txt_mgr, GLSLProgram* prog, mesh_data info, bool isStripped )
+S3DMesh::S3DMesh( GLSLProgram* prog, mesh_data info, bool isStripped )
 {
 	this->prog = prog;
 
@@ -191,7 +195,8 @@ S3DMesh::S3DMesh( Texture_Manager& txt_mgr, GLSLProgram* prog, mesh_data info, b
 	this->prog->printActiveUniforms();
 	this->prog->printActiveAttribs();
 
-	texID = txt_mgr.GetID( textureName );
+	//get_blit3d()->tManager->LoadTexture( textureName );
+	texID = get_game_engine().txtr_mgr.GetID( textureName );
 
 	//enable blending
 	glEnable( GL_BLEND );
@@ -209,7 +214,9 @@ S3DMesh::~S3DMesh()
 	delete[] verts;
 	delete[] indices;
 
+	//get_blit3d()->tManager->FreeTexture( textureName );
 	get_game_engine().txtr_mgr.FreeTexture( texID );
+	
 	//free the vbo's
 	glDeleteBuffers( 2, vbo );
 	//free the vao

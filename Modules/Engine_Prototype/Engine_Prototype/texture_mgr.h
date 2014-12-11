@@ -21,6 +21,7 @@
 
 using texid = GLuint;
 
+
 namespace coope
 {
 	struct tex
