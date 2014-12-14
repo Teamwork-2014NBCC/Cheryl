@@ -59,22 +59,18 @@ void S3DMesh::Update( double milliseconds )
 * Created by:	Mark Murphy		Date: Oct. 8, 2014
 * Modified by:	Josh Cooper		Date: Dec. 4, 2014
 *****************************************************/
-void S3DMesh::Draw()
+void S3DMesh::Draw( glm::mat4 modelMatrix )
 {
 	float time = ( float )glfwGetTime();
 
 	glBindVertexArray( vao );
 
-	modelMatrix = glm::mat4( 1.f ) * translation_Matrix * rotation_Matrix * scale_Matrix;
 	//prog = blit3D->sManager->UseShader("shader.vert", "shader.frag");
 	prog->setUniform( "modelMatrix", modelMatrix );
-
 	prog->setUniform( "Kd", Kd );
 	prog->setUniform( "Ka", Ka );
 	prog->setUniform( "Ks", Ks );
 	prog->setUniform( "Shininess", Shininess );
-
-
 	//get_blit3d()->tManager->BindTexture( textureName );
 	get_game_engine().txtr_mgr.BindTexture( texID );
 
@@ -85,38 +81,41 @@ void S3DMesh::Draw()
 	//=================================
 }
 
-/****************************************************
-* Transform method
-* Used to translate model
-* Created by:	Mark Murphy		Date: Oct. 30, 2014
-* Modified by:	Mark Murphy		Date: Oct. 30, 2014
-*****************************************************/
-void S3DMesh::Transform( float x, float y, float z )
-{
-	translation_Matrix = glm::translate( glm::mat4( 1.f ), glm::vec3( x, y, z ) );
-}
 
-/****************************************************
-* Rotate method
-* Used to rotate model
-* Created by:	Mark Murphy		Date: Oct. 30, 2014
-* Modified by:	Mark Murphy		Date: Oct. 30, 2014
-*****************************************************/
-void S3DMesh::Rotate( float angle, float x, float y, float z )
-{
-	rotation_Matrix = glm::rotate( glm::mat4( 1.f ), angle, glm::vec3( x, y, z ) );
-}
+//Deprecated Methods
+///****************************************************
+//* Transform method
+//* Used to translate model
+//* Created by:	Mark Murphy		Date: Oct. 30, 2014
+//* Modified by:	Mark Murphy		Date: Oct. 30, 2014
+//*****************************************************/
+//void S3DMesh::Transform( float x, float y, float z )
+//{
+//	translation_Matrix = glm::translate( glm::mat4( 1.f ), glm::vec3( x, y, z ) );
+//}
+//
+///****************************************************
+//* Rotate method
+//* Used to rotate model
+//* Created by:	Mark Murphy		Date: Oct. 30, 2014
+//* Modified by:	Mark Murphy		Date: Oct. 30, 2014
+//*****************************************************/
+//void S3DMesh::Rotate( float angle, float x, float y, float z )
+//{
+//	rotation_Matrix = glm::rotate( glm::mat4( 1.f ), angle, glm::vec3( x, y, z ) );
+//}
+//
+///****************************************************
+//* Scale method
+//* Used to scale model
+//* Created by:	Mark Murphy		Date: Oct. 30, 2014
+//* Modified by:	Mark Murphy		Date: Nov. 4, 2014
+//*****************************************************/
+//void S3DMesh::Scale( float x, float y, float z )
+//{
+//	scale_Matrix = glm::scale( glm::mat4( 1.f ), glm::vec3( x, y, z ) );
+//}
 
-/****************************************************
-* Scale method
-* Used to scale model
-* Created by:	Mark Murphy		Date: Oct. 30, 2014
-* Modified by:	Mark Murphy		Date: Nov. 4, 2014
-*****************************************************/
-void S3DMesh::Scale( float x, float y, float z )
-{
-	scale_Matrix = glm::scale( glm::mat4( 1.f ), glm::vec3( x, y, z ) );
-}
 
 /****************************************************
 * S3DMesh constructer
@@ -136,10 +135,12 @@ S3DMesh::S3DMesh( GLSLProgram* prog, mesh_data info, bool isStripped )
 
 	bStripped = isStripped;
 
+	//Deprecated Properties
+	/*
 	modelMatrix = glm::mat4( 1.f );
 	scale_Matrix = glm::mat4( 1.f );
 	rotation_Matrix = glm::mat4( 1.f );
-	translation_Matrix = glm::mat4( 1.f );
+	translation_Matrix = glm::mat4( 1.f );*/
 
 	// tell GL to only draw onto a pixel if the shape is closer to the viewer
 	glEnable( GL_DEPTH_TEST ); // enable depth-testing

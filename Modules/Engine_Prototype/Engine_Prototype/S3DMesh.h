@@ -11,7 +11,6 @@
 #include "texture_mgr.h"
 //#include "file_mgr.h"
 
-
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 extern GLFWwindow* window;
@@ -19,7 +18,6 @@ extern GLFWwindow* window;
 //GLOBAL DATA
 
 //glm::mat4 modelMatrix;
-
 
 struct mesh_data
 {
@@ -30,7 +28,7 @@ struct mesh_data
 	std::string textureName;
 
 	mesh_data(){}
-	mesh_data(int nv, int ni, float* verts, int* indices, std::string tx)
+	mesh_data( int nv, int ni, float* verts, int* indices, std::string tx )
 	{
 		numVerts = nv;
 		numIndices = ni;
@@ -38,7 +36,7 @@ struct mesh_data
 		this->indices = indices;
 		textureName = tx;
 	}
-	mesh_data(const mesh_data& ref)
+	mesh_data( const mesh_data& ref )
 	{
 		numVerts = ref.numVerts;
 		numIndices = ref.numIndices;
@@ -47,7 +45,6 @@ struct mesh_data
 		textureName = ref.textureName;
 	}
 };
-
 
 /******************************************************
 * S3DMesh Class
@@ -68,9 +65,7 @@ private:
 	GLuint vbo[2];
 	GLuint vao = 0;
 
-	
 	texid texID;
-
 
 	mesh_data info;
 	int		&numVerts = info.numVerts;
@@ -78,24 +73,26 @@ private:
 	float*	&verts = info.verts;
 	int*		&indices = info.indices;
 	std::string &textureName = info.textureName;
-
+	//Deprecated Properties
+	/*
 	glm::mat4 modelMatrix;
 	glm::mat4 rotation_Matrix;
 	glm::mat4 translation_Matrix;
-	glm::mat4 scale_Matrix;
+	glm::mat4 scale_Matrix;*/
 
 public:
 	bool bStripped;
-	void Import(std::string fileName);
-	void Update(double milliseconds);
-	void Draw();
+	S3DMesh( GLSLProgram* prog, mesh_data info, bool isStripped = true );
+	~S3DMesh();
+	void Import( std::string fileName );
+	void Update( double milliseconds );
+	void Draw( glm::mat4 modelMatrix );
 
+	//Deprecated Methods
+	/*
 	void Transform(float x, float y, float z);
 	void Rotate(float angle, float x, float y, float z);
-	void Scale(float x, float y, float z);
-
-	S3DMesh( GLSLProgram* prog, mesh_data info, bool isStripped = true);
-	~S3DMesh();
+	void Scale(float x, float y, float z);*/
 };
 
 #endif

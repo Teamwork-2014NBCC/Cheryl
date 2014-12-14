@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Font">
       <UniqueIdentifier>{6fd86bf2-73c3-4d07-b35a-d0a28b4066f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\3D">
+      <UniqueIdentifier>{46a34973-6df5-4c9c-a44c-a66f3f8283ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Combat.h">
@@ -72,17 +75,20 @@
     <ClInclude Include="Enemy.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="S3DMesh.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="items.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="S3DMesh.h">
+      <Filter>Header Files\3D</Filter>
+    </ClInclude>
     <ClInclude Include="mesh_mgr.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="scene_nodes.h">
+      <Filter>Header Files\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
