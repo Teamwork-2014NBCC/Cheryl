@@ -66,7 +66,7 @@ mesh* s3d_mesh_mgr::Import_S3D_File( std::string file_path )
 			File_Handle.close();
 
 			mesh_data info( total_vertices, total_indices, Vertices, Indices, texture_file );
-			mesh* mymesh = new mesh( get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" ), info, false );
+			mesh* mymesh = new mesh( get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" ), info );
 			return mymesh;
 		}
 		catch ( ... )

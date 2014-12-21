@@ -16,8 +16,8 @@ typedef std::pair<short, short> coords;
 class cell_mgr
 {
 	private:
-		int																		Cells_Visited = 0;
-		std::map<coords, bool>										Cells;
+		int																						Cells_Visited = 0;
+		std::map<coords, bool>												Cells;
 		std::queue<std::map<coords, bool>::iterator>	Q_Branch;
 	protected:
 	public:

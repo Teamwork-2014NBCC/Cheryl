@@ -57,9 +57,6 @@
     <ClCompile Include="input.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="engine_funcs.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Combat.cpp">
       <Filter>Source Files\RPG</Filter>
     </ClCompile>
@@ -93,6 +90,9 @@
     <ClCompile Include="level_gen.cpp">
       <Filter>Source Files\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="engine_funcs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -111,9 +111,6 @@
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="texture_mgr.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="game.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Combat.h">
@@ -159,6 +156,9 @@
       <Filter>Header Files\Levels\Maze Gen Alg</Filter>
     </ClInclude>
     <ClInclude Include="debug_funcs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

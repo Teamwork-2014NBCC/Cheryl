@@ -40,7 +40,7 @@ class mesh
 {
 private:
 	GLSLProgram*	prog = nullptr;
-	bool bStripped = false;
+	bool bStripped = true;
 
 	mesh_data		info;
 	GLuint				&total_vertices = info.total_vertices;

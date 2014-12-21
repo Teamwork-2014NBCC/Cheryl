@@ -25,7 +25,7 @@ private:
 	maze_specs						size;
 	coords								position;
 	maze_path						current_path;
-	std::list<maze_path>		paths;
+	std::list<maze_path>	paths;
 
 protected:
 	inline direction get_directions();

@@ -46,9 +46,13 @@ private:
 	RotatorNode* level_rotator = nullptr;
 
 	maze_specs size;
-	Tile** map = nullptr;
+	Tile*** map = nullptr;
 
 protected:
+	void Generate()
+	{
+		Generate( size.first, size.second );
+	}
 	void Generate( int width, int height );
 
 public:

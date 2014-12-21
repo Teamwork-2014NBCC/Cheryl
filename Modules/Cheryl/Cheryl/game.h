@@ -7,27 +7,31 @@
 #include <mutex>
 
 #include "input_mgr.h"
+
 #include "texture_mgr.h"
+#include "ffont.h"
+
 #include "mesh_mgr.h"
 #include "scene_nodes.h"
-#include "ffont.h"
+
+#include "level_gen.h"
 
 class game
 {
 private:
 	input_mgr KeyInput_Mgr;
 	Root_SceneNode SceneGraph;
-	Font_Handler Keeper_of_the_Font;
+	Font_Handler* Keeper_of_the_Font = nullptr;
+	Dungeon The_Maze = Dungeon( &SceneGraph );
 
 	std::mutex mouseMutex;
-	float cx, cy;
+	float cx = 10;
+	float cy = 10;
 
 protected:
 public:
-	~game()
-	{
-	}
 	void Init();
+	void Init_GFX();
 	void DeInit();
 	void Update( double& seconds );
 	void Draw();

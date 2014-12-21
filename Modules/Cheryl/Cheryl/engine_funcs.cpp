@@ -62,11 +62,6 @@ inline void game::Init()
 	dbg::FileLog_Mgr::RegisterNewLog( L"Memory Issues.log" );
 	dbg::FileLog_Mgr::Start();
 
-	//enable blending
-	glEnable( GL_BLEND );
-	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-
-
 	//This is the directory Meshes and Textures are found in
 	File_Manager::Register_Directory( textures );
 	File_Manager::Register_Directory( models );
@@ -77,7 +72,24 @@ inline void game::Init()
 	//load sprites
 	txtr_mgr.LoadAll();
 	mesh_mgr.Load_All();
+	Keeper_of_the_Font = new Font_Handler();
 
+	The_Maze.Descend();
+
+	TransformerNode* myBox = new TransformerNode( &SceneGraph );
+	glm::vec3 axis;
+	axis.z = -1;
+	myBox->Transform( 30, axis );
+	myBox->Set_Mesh( mesh_mgr.Get_Mesh( "box.s3d" ) );/**/
+
+	Init_GFX();
+}
+
+void game::Init_GFX()
+{
+	//enable blending
+	glEnable( GL_BLEND );
+	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
 	//We should setup our lighting shader
 	GLSLProgram* prog = get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" );
@@ -90,18 +102,11 @@ inline void game::Init()
 	prog->setUniform( "viewMatrix", get_blit3d()->viewMatrix );
 	prog->setUniform( "LightPosition", LightPosition );
 	prog->setUniform( "LightIntensity", LightIntensity );/**/
-
-	get_blit3d()->SetMode( Blit3DRenderMode::BLIT3D ); //change to 2d mode before drawing sprites/text!
-
-	//We need to
-	mouseMutex.lock();
-	cx = get_blit3d()->screenWidth / 2;
-	cy = get_blit3d()->screenHeight / 2;
-	mouseMutex.unlock();
 }
 
 inline void game::DeInit( void )
 {
+	delete Keeper_of_the_Font;
 }
 
 inline void game::Update( double& seconds )
@@ -115,8 +120,12 @@ inline void game::Draw( void )
 	// wipe the drawing surface clear
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
+	get_blit3d()->SetMode( Blit3DRenderMode::BLIT3D );
 	//draw sprites, from front to back
 	SceneGraph.Draw();
+
+	//get_blit3d()->SetMode( Blit3DRenderMode::BLIT2D, get_blit3d()->shader2d );
+	//Keeper_of_the_Font->Write( false, 100, 100, "Cheryl: Hello World!" );
 
 	//glfwSwapBuffers( get_blit3d()->window );
 }
