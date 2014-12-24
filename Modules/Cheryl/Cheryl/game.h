@@ -24,14 +24,28 @@ private:
 	Font_Handler* Keeper_of_the_Font = nullptr;
 	Dungeon The_Maze = Dungeon( &SceneGraph );
 
+	glm::vec3 player_straight_axis;
+	glm::vec3 player_side_axis;
 	std::mutex mouseMutex;
 	float cx = 10;
 	float cy = 10;
+	int player_x = 1;
+	int player_y = 1;
+	
+	std::thread Rotator_Thread;
 
 protected:
+	void Init_GFX();
+	void Init_Input();
+	void Rotate_Camera( float angle );
+	void Rotate_Left();
+	void Rotate_Right();
+	void Move_Forward();
+	void Move_Backward();
+	void Move_Left();
+	void Move_Right();
 public:
 	void Init();
-	void Init_GFX();
 	void DeInit();
 	void Update( double& seconds );
 	void Draw();

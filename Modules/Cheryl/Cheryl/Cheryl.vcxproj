@@ -11,14 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="camera_controls.cpp" />
     <ClCompile Include="cell_manager.cpp" />
     <ClCompile Include="Combat.cpp" />
-    <ClCompile Include="debug_funcs.cpp" />
+    <ClCompile Include="util_func.cpp" />
     <ClCompile Include="directions.cpp" />
     <ClCompile Include="engine_funcs.cpp" />
-    <ClCompile Include="file_util.cpp" />
     <ClCompile Include="ffont.cpp" />
-    <ClCompile Include="input.cpp" />
+    <ClCompile Include="input_mgr.cpp" />
     <ClCompile Include="level_gen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesh.cpp" />
@@ -32,7 +32,7 @@
     <ClInclude Include="boolstuff.h" />
     <ClInclude Include="cell_manager.h" />
     <ClInclude Include="Combat.h" />
-    <ClInclude Include="debug_funcs.h" />
+    <ClInclude Include="util_func.h" />
     <ClInclude Include="directions.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="enemy_mgr.h" />

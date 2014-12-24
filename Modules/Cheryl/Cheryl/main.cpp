@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 	get_blit3d()->SetDoCursor(DoCursor);
 
 	//Run() blocks until the window is closed
-	get_blit3d()->Run(Blit3DThreadModel::SIMPLEMULTITHREADED);
+	get_blit3d()->Run( Blit3DThreadModel::SIMPLEMULTITHREADED );
 
 	delete get_blit3d();
 	dbg::FileLog_Mgr::Stop();

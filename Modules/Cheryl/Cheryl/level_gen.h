@@ -7,6 +7,7 @@
 #include "scene_nodes.h"
 
 enum tiletype {
+	invalid = -1,
 	FloorTile = 0,
 	WallTile = 1,
 	StartTile = 2,
@@ -26,16 +27,14 @@ struct Tile
 		}
 		return false;
 	}
-};
-struct Wall : Tile
-{
-	Wall( SceneNode* level_root, int x, int y );
-	~Wall();
-};
-struct Floor : Tile
-{
-	Floor( SceneNode* level_root, int x, int y );
-	~Floor();
+	void Init()
+	{
+		tile_root = nullptr;
+		type = invalid;
+	}
+	void Wall( SceneNode* level_root, int x, int y );
+	void Floor( SceneNode* level_root, int x, int y );
+	~Tile();
 };
 
 class Dungeon
@@ -46,7 +45,7 @@ private:
 	RotatorNode* level_rotator = nullptr;
 
 	maze_specs size;
-	Tile*** map = nullptr;
+	Tile** map = nullptr;
 
 protected:
 	void Generate()
@@ -57,6 +56,7 @@ protected:
 
 public:
 	Dungeon( Root_SceneNode* root );
+	~Dungeon();
 	void Descend();
 	bool canMove( int x, int y );
 };

@@ -1,13 +1,15 @@
 #include "level_gen.h"
 #include "global.h"
 
-Wall::Wall( SceneNode* level_root, int x, int y )
+void Tile::Wall( SceneNode* level_root, int x, int y )
 {
+	delete tile_root;
 	tile_root = new SceneNode( level_root );
 
 	TransformerNode* displacer = new TransformerNode( tile_root );
 	RotatorNode* rotator = new RotatorNode( displacer, true, true, true );
-	rotator->Set_Mesh( get_game_engine().mesh_mgr.Get_Mesh( "box.s3d" ) );
+	ScalarNode* scaling_node = new ScalarNode( rotator, false, false, true );
+	scaling_node->Set_Mesh( get_game_engine().mesh_mgr.Get_Mesh( "box.s3d" ) );
 	
 	glm::vec3 axis;
 	axis.x = 1;
@@ -17,21 +19,18 @@ Wall::Wall( SceneNode* level_root, int x, int y )
 	displacer->Transform( y, axis );
 	axis.y = 0;
 	axis.z = 1;
-	displacer->Transform( 1, axis );/**/
+	displacer->Transform( 1, axis );
+	scaling_node->Scale( 2.0f );/**/
 }
 
-Wall::~Wall()
+void Tile::Floor( SceneNode* level_root, int x, int y )
 {
 	delete tile_root;
-}
-
-Floor::Floor( SceneNode* level_root, int x, int y )
-{
 	tile_root = new SceneNode( level_root );
 
 	TransformerNode* displacer = new TransformerNode( tile_root );
 	RotatorNode* rotator = new RotatorNode( displacer, true, true, true );
-	//rotator->Set_Mesh( get_game_engine().mesh_mgr.Get_Mesh( "box.s3d" ) );
+	rotator->Set_Mesh( get_game_engine().mesh_mgr.Get_Mesh( "box.s3d" ) );
 
 	glm::vec3 axis;
 	axis.x = 1;
@@ -41,7 +40,7 @@ Floor::Floor( SceneNode* level_root, int x, int y )
 	displacer->Transform( y, axis );/**/
 }
 
-Floor::~Floor()
+Tile::~Tile()
 {
 	delete tile_root;
 }
@@ -57,22 +56,23 @@ void Dungeon::Generate( int width, int height )
 	{
 		delete map;
 	}
-	map = (Tile***)Matrix2D( width, height, sizeof( Tile* ), 0, 0 );
+	map = (Tile**)Matrix2D( width, height, sizeof( Tile ), 0, 0 );
 
 	for ( int x = 0; x < width; ++x )
 	{
 		for ( int y = height - 1; y >= 0; --y )
 		{
+			map[x][y].Init();
 			switch ( raw_map[x][y] )
 			{
 				case 0:
-					map[x][y] = new Floor( this->level_rotator, x, y );
+					map[x][y].Floor( this->level_rotator, x, y );
 					break;
 				case 1:
-					map[x][y] = new Wall( this->level_rotator, x, y );
+					map[x][y].Wall( this->level_rotator, x, y );
 					break;
 				default:
-					map[x][y] = new Wall( this->level_rotator, x, y );
+					map[x][y].Wall( this->level_rotator, x, y );
 					break;
 			}
 		}
@@ -91,15 +91,23 @@ Dungeon::Dungeon( Root_SceneNode* root )
 
 	glm::vec3 axis;
 	axis.z = -1;
-	level_transformer->Transform( 30, axis );
+	level_transformer->Transform( 1, axis );
 	axis.z = 0;
 	axis.x = 1;
-	//level_transformer->Transform( 30, axis );
+	level_transformer->Transform( 1.5, axis );
 	axis.x = 0;
-	axis.y = 1;
-	//level_transformer->Transform( 30, axis );
+	axis.y = -1;
+	level_transformer->Transform( -1, axis );
 
 	level_rotator = new RotatorNode( level_transformer, true, true, true );
+	level_rotator->Rotate( 90.0f, glm::vec3( 1, 0, 0 ) );
+	level_rotator->Rotate( 90.0f, glm::vec3( 0, 0, 1 ) );
+}
+
+Dungeon::~Dungeon()
+{
+	delete map;
+	delete level_root;
 }
 
 void Dungeon::Descend()
@@ -119,6 +127,6 @@ bool Dungeon::canMove( int x, int y )
 	{
 		return false;
 	}
-	return !map[x][y]->isWall();
+	return !map[x][y].isWall();
 
 }

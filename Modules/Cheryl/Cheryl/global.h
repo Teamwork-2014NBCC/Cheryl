@@ -15,6 +15,11 @@ extern string textures;
 extern string models;
 extern string otherfiles;
 
+extern std::mutex View_Mutex;
+extern glm::mat4 View_Matrix;
+extern glm::mat4 View_Angle;
+extern glm::mat4 View_Position;
+
 extern unsigned int seed_value;
 extern unsigned int seed_value2;
 

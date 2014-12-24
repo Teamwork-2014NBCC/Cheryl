@@ -195,12 +195,7 @@ void Font_Handler::ChangeFontSize( float newSize )
 	if ( newSize != fontSize )
 	{
 		fontSize = newSize;
-
-		if ( ffont )
-		{
-	
-			delete ffont;
-		}
+		delete ffont;
 		//load a font set
 		ffont = new FFont( "font.png", "fontMetrics.dat", newSize, get_blit3d()->shader2d );
 		assert( !ffont ); //make sure it loaded

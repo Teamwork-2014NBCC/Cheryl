@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Levels\Maze Gen Alg">
       <UniqueIdentifier>{5747fe9f-a242-4280-89ab-0bfdbab79dcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Misc">
+      <UniqueIdentifier>{6a996680-a433-44b8-a8ae-72fe53726993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Misc">
+      <UniqueIdentifier>{159cc938-0722-4866-b308-36ba9701b84a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,9 +60,6 @@
     <ClCompile Include="texture_mgr.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="input.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Combat.cpp">
       <Filter>Source Files\RPG</Filter>
     </ClCompile>
@@ -65,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="Stat_System.cpp">
       <Filter>Source Files\RPG</Filter>
-    </ClCompile>
-    <ClCompile Include="file_util.cpp">
-      <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="mesh.cpp">
       <Filter>Source Files\Graphical</Filter>
@@ -84,24 +84,24 @@
     <ClCompile Include="thebuilder.cpp">
       <Filter>Source Files\Levels\Maze Gen Alg</Filter>
     </ClCompile>
-    <ClCompile Include="debug_funcs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="level_gen.cpp">
       <Filter>Source Files\Levels</Filter>
     </ClCompile>
     <ClCompile Include="engine_funcs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="util_func.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_controls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input_mgr.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="boolstuff.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="file_mgr.h">
@@ -155,11 +155,17 @@
     <ClInclude Include="thebuilder.h">
       <Filter>Header Files\Levels\Maze Gen Alg</Filter>
     </ClInclude>
-    <ClInclude Include="debug_funcs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="util_func.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="boolstuff.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="log.h">
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

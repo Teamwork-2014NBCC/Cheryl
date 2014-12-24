@@ -24,7 +24,6 @@ mesh::~mesh()
 	delete Indices;
 }
 
-
 void mesh::init()
 {
 	// tell GL to only draw onto a pixel if the shape is closer to the viewer
@@ -100,10 +99,7 @@ void mesh::deinit()
 
 void mesh::draw( glm::mat4& modelMatrix )
 {
-	this->prog = get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" );
 	this->prog->setUniform( "modelMatrix", modelMatrix );
-	this->prog->setUniform( "projectionMatrix", get_blit3d()->projectionMatrix );
-	this->prog->setUniform( "viewMatrix", get_blit3d()->viewMatrix );
 
 	glBindVertexArray( this->vao );
 	get_game_engine().txtr_mgr.BindTexture( tex_id );

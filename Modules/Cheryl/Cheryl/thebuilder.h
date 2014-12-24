@@ -6,7 +6,7 @@
 #include "directions.h"
 
 #include "log.h"
-#include "debug_funcs.h"
+#include "util_func.h"
 
 #include <ctime>
 #include <stack>

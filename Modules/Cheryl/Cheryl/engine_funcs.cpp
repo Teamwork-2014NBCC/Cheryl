@@ -19,6 +19,10 @@
 #endif
 
 //GLOBAL DATA
+std::mutex View_Mutex;
+glm::mat4 View_Matrix = glm::mat4( 1.0f );
+glm::mat4 View_Angle = glm::mat4( 1.0f );
+glm::mat4 View_Position = glm::mat4( 1.0f );
 
 Blit3D* get_blit3d()
 {
@@ -76,13 +80,8 @@ inline void game::Init()
 
 	The_Maze.Descend();
 
-	TransformerNode* myBox = new TransformerNode( &SceneGraph );
-	glm::vec3 axis;
-	axis.z = -1;
-	myBox->Transform( 30, axis );
-	myBox->Set_Mesh( mesh_mgr.Get_Mesh( "box.s3d" ) );/**/
-
 	Init_GFX();
+	Init_Input();
 }
 
 void game::Init_GFX()
@@ -91,53 +90,77 @@ void game::Init_GFX()
 	glEnable( GL_BLEND );
 	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
-	//We should setup our lighting shader
-	GLSLProgram* prog = get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" );
 	//Setting shader variable values
 	get_blit3d()->projectionMatrix *= glm::perspective( 45.0f, (GLfloat)( get_blit3d()->screenWidth ) / (GLfloat)( get_blit3d()->screenHeight ), 0.1f, 10000.0f );
 	glm::vec3 LightPosition = glm::vec3( 1.0f, 1.0f, 1.0f );
 	glm::vec3 LightIntensity = glm::vec3( 1.0f, 1.0f, 1.0f );
+	
+	//Gotta use this shader
+	GLSLProgram* prog = get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" );
 	//Binding variables to shader
 	prog->setUniform( "projectionMatrix", get_blit3d()->projectionMatrix );
-	prog->setUniform( "viewMatrix", get_blit3d()->viewMatrix );
 	prog->setUniform( "LightPosition", LightPosition );
-	prog->setUniform( "LightIntensity", LightIntensity );/**/
+	prog->setUniform( "LightIntensity", LightIntensity );
+
+	//Camera Setup
+	View_Angle = glm::rotate( View_Angle, 180.0f, glm::vec3( 0, 0, 1 ) );
+	View_Matrix = View_Angle * View_Position;
+	glm::vec4 dir = View_Angle * glm::vec4( 0, 0, 1, 0 );
+	player_straight_axis = glm::vec3( dir.x, dir.y, dir.z );
+	dir = View_Angle * glm::vec4( 1, 0, 0, 0 );
+	player_side_axis = glm::vec3( dir.x, dir.y, dir.z );
+}
+
+void game::Init_Input()
+{
+	KeyInput_Mgr.Register_Action( GLFW_KEY_Q, std::bind( &game::Rotate_Left, this ) );
+	KeyInput_Mgr.Register_Action( GLFW_KEY_E, std::bind( &game::Rotate_Right, this ) );
+	KeyInput_Mgr.Register_Action( GLFW_KEY_W, std::bind( &game::Move_Forward, this ) );
+	KeyInput_Mgr.Register_Action( GLFW_KEY_S, std::bind( &game::Move_Backward, this ) );
+	KeyInput_Mgr.Register_Action( GLFW_KEY_A, std::bind( &game::Move_Left, this ) );
+	KeyInput_Mgr.Register_Action( GLFW_KEY_D, std::bind( &game::Move_Right, this ) );
+	KeyInput_Mgr.Start();
 }
 
 inline void game::DeInit( void )
 {
+	KeyInput_Mgr.Stop();
+	if ( Rotator_Thread.joinable() )
+	{
+		Rotator_Thread.join();
+	}
 	delete Keeper_of_the_Font;
 }
 
 inline void game::Update( double& seconds )
 {
+	//View_Matrix = glm::rotate( View_Matrix, 0.5f, glm::vec3( 0, 0, 1 ) );
 	SceneGraph.Update( seconds );
 }
 
 inline void game::Draw( void )
 {
-	glClearColor( 0.8f, 0.6f, 0.7f, 0.0f );	//clear colour: r,g,b,a
-	// wipe the drawing surface clear
+	glClearColor( 0.8f, 0.6f, 0.7f, 0.0f );
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
 	get_blit3d()->SetMode( Blit3DRenderMode::BLIT3D );
-	//draw sprites, from front to back
+	auto prog = get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" );
+	View_Mutex.lock();
+	prog->setUniform( "viewMatrix", View_Matrix );
+	View_Mutex.unlock();
 	SceneGraph.Draw();
 
-	//get_blit3d()->SetMode( Blit3DRenderMode::BLIT2D, get_blit3d()->shader2d );
-	//Keeper_of_the_Font->Write( false, 100, 100, "Cheryl: Hello World!" );
-
-	//glfwSwapBuffers( get_blit3d()->window );
+	get_blit3d()->SetMode( Blit3DRenderMode::BLIT2D, get_blit3d()->shader2d );
+	Keeper_of_the_Font->Write( false, 100, 100, "Cheryl: Hello World!" );
 }
 
-//the key codes/actions/mods for DoInput are from GLFW: check its documentation for their values
 inline void game::DoInput( int& key, int& scancode, int& action, int& mods )
 {
 	if ( key == GLFW_KEY_ESCAPE && action == GLFW_PRESS )
 	{
 		get_blit3d()->Quit(); //start the shutdown sequence
 	}
-	if ( action == GLFW_PRESS )
+	else if ( action == GLFW_PRESS )
 	{
 		KeyInput_Mgr.Add( key );
 	}

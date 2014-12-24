@@ -3,7 +3,7 @@
 #define LOG_CUSTOM_LEVEL
 
 #include "log.h"
-#include "debug_funcs.h"
+#include "util_func.h"
 
 #include <random>
 #include <ctime>

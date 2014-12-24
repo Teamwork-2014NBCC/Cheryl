@@ -299,7 +299,7 @@ public:
 	}
 	void Scale( float scale )
 	{
-		Scaling_Matrix = glm::scale( Scaling_Matrix, scale * axis );
+		Scaling_Matrix = glm::scale( Scaling_Matrix, scale * axis + glm::vec3( 1.f ) );
 		Trickle_Down_Data();
 	}
 	void Scale( float scale, glm::vec3 axis )
