@@ -25,20 +25,12 @@ void game::Rotate_Camera( float angle )
 
 void game::Rotate_Left()
 {
-	if ( Rotator_Thread.joinable() )
-	{
-		Rotator_Thread.join();
-	}
-	Rotator_Thread = std::thread( &game::Rotate_Camera, this, 90.0f );
+	Rotate_Camera( 90.0f );
 }
 
 void game::Rotate_Right()
 {
-	if ( Rotator_Thread.joinable() )
-	{
-		Rotator_Thread.join();
-	}
-	Rotator_Thread = std::thread( &game::Rotate_Camera, this, -90.0f );
+	Rotate_Camera( -90.0f );
 }
 
 void game::Move_Forward()

@@ -73,42 +73,57 @@ inline void game::Init()
 	// DARREN'S PROJECT DIRECTORY (right click a .cpp or .h tab above and open containing folder, copy paste directory into string)
 	File_Manager::Register_Directory( "" );
 
-	//load sprites
-	txtr_mgr.LoadAll();
-	mesh_mgr.Load_All();
-	Keeper_of_the_Font = new Font_Handler();
-
-	The_Maze.Descend();
-
 	Init_GFX();
 	Init_Input();
+
+	Keeper_of_the_Font = new Font_Handler();
+	The_Maze.Descend();
 }
 
 void game::Init_GFX()
 {
-	//enable blending
+	// Load Assets
+	txtr_mgr.LoadAll();
+	mesh_mgr.Load_All();
+
+	// Enable Blending
 	glEnable( GL_BLEND );
 	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
-	//Setting shader variable values
-	get_blit3d()->projectionMatrix *= glm::perspective( 45.0f, (GLfloat)( get_blit3d()->screenWidth ) / (GLfloat)( get_blit3d()->screenHeight ), 0.1f, 10000.0f );
-	glm::vec3 LightPosition = glm::vec3( 1.0f, 1.0f, 1.0f );
-	glm::vec3 LightIntensity = glm::vec3( 1.0f, 1.0f, 1.0f );
-	
-	//Gotta use this shader
-	GLSLProgram* prog = get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" );
-	//Binding variables to shader
-	prog->setUniform( "projectionMatrix", get_blit3d()->projectionMatrix );
-	prog->setUniform( "LightPosition", LightPosition );
-	prog->setUniform( "LightIntensity", LightIntensity );
-
-	//Camera Setup
+	// Camera Setup
 	View_Angle = glm::rotate( View_Angle, 180.0f, glm::vec3( 0, 0, 1 ) );
 	View_Matrix = View_Angle * View_Position;
 	glm::vec4 dir = View_Angle * glm::vec4( 0, 0, 1, 0 );
 	player_straight_axis = glm::vec3( dir.x, dir.y, dir.z );
 	dir = View_Angle * glm::vec4( 1, 0, 0, 0 );
 	player_side_axis = glm::vec3( dir.x, dir.y, dir.z );
+
+	// We need to prepare our 3d Shader
+	shader_3d = get_blit3d()->sManager->GetShader( "lighting.vert", "lighting.frag" );
+	
+	// Preparing Variable Values
+	get_blit3d()->projectionMatrix *= glm::perspective( 45.0f, (GLfloat)( get_blit3d()->screenWidth ) / (GLfloat)( get_blit3d()->screenHeight ), 0.1f, 10000.0f );
+	glm::vec3 LightPosition = glm::vec3( 1.0f, 1.0f, 1.0f );
+	glm::vec3 LightIntensity = glm::vec3( 1.0f, 1.0f, 1.0f );
+	glm::vec3 Kd = glm::vec3( 1.0f, 1.0f, 0.2f );
+	glm::vec3 Ka = glm::vec3( 0.1f, 0.1f, 0.2f );
+	glm::vec3 Ks = glm::vec3( 1.0f, 1.0f, 1.0f );
+	GLfloat Shininess = 1.0f;
+	
+	// Binding Values to Variables within shader
+	shader_3d->setUniform( "projectionMatrix", get_blit3d()->projectionMatrix );
+	shader_3d->setUniform( "LightPosition", LightPosition );
+	shader_3d->setUniform( "LightIntensity", LightIntensity );
+	shader_3d->setUniform( "Kd", Kd );
+	shader_3d->setUniform( "Ka", Ka );
+	shader_3d->setUniform( "Ks", Ks );
+	shader_3d->setUniform( "Shininess", Shininess );
+	shader_3d->setUniform( "in_Alpha", 1.f );
+	shader_3d->bindAttribLocation( 0, "in_Position" );
+	shader_3d->bindAttribLocation( 1, "in_Normal" );
+	shader_3d->bindAttribLocation( 2, "in_Texcoord" );
+	shader_3d->printActiveUniforms();
+	shader_3d->printActiveAttribs();
 }
 
 void game::Init_Input()
@@ -125,10 +140,6 @@ void game::Init_Input()
 inline void game::DeInit( void )
 {
 	KeyInput_Mgr.Stop();
-	if ( Rotator_Thread.joinable() )
-	{
-		Rotator_Thread.join();
-	}
 	delete Keeper_of_the_Font;
 }
 
@@ -144,9 +155,9 @@ inline void game::Draw( void )
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
 	get_blit3d()->SetMode( Blit3DRenderMode::BLIT3D );
-	auto prog = get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" );
+	this->shader_3d->use();
 	View_Mutex.lock();
-	prog->setUniform( "viewMatrix", View_Matrix );
+	this->shader_3d->setUniform( "viewMatrix", View_Matrix );
 	View_Mutex.unlock();
 	SceneGraph.Draw();
 
@@ -163,10 +174,6 @@ inline void game::DoInput( int& key, int& scancode, int& action, int& mods )
 	else if ( action == GLFW_PRESS )
 	{
 		KeyInput_Mgr.Add( key );
-	}
-	else if ( action == GLFW_RELEASE )
-	{
-		KeyInput_Mgr.Remove( key );
 	}
 }
 

@@ -21,6 +21,7 @@ class game
 private:
 	input_mgr KeyInput_Mgr;
 	Root_SceneNode SceneGraph;
+	GLSLProgram* shader_3d = nullptr;
 	Font_Handler* Keeper_of_the_Font = nullptr;
 	Dungeon The_Maze = Dungeon( &SceneGraph );
 
@@ -31,8 +32,6 @@ private:
 	float cy = 10;
 	int player_x = 1;
 	int player_y = 1;
-	
-	std::thread Rotator_Thread;
 
 protected:
 	void Init_GFX();
@@ -44,6 +43,7 @@ protected:
 	void Move_Backward();
 	void Move_Left();
 	void Move_Right();
+
 public:
 	void Init();
 	void DeInit();

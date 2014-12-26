@@ -9,7 +9,7 @@
 using std::string;
 using std::ifstream;
 
-struct mesh_data
+struct render_data
 {
 	GLuint total_vertices = 0;
 	GLuint total_indices = 0;
@@ -17,8 +17,8 @@ struct mesh_data
 	unsigned int* Indices = nullptr;
 	std::string texture_file;
 
-	mesh_data(){}
-	mesh_data( int nv, int ni, float* verts, unsigned int* indices, std::string tx )
+	render_data(){}
+	render_data( int nv, int ni, float* verts, unsigned int* indices, std::string tx )
 	{
 		total_vertices = nv;
 		total_indices = ni;
@@ -26,7 +26,7 @@ struct mesh_data
 		this->Indices = indices;
 		texture_file = tx;
 	}
-	mesh_data( const mesh_data& ref )
+	render_data( const render_data& ref )
 	{
 		total_vertices = ref.total_vertices;
 		total_indices = ref.total_indices;
@@ -42,7 +42,7 @@ private:
 	GLSLProgram*	prog = nullptr;
 	bool bStripped = true;
 
-	mesh_data		info;
+	render_data		info;
 	GLuint				&total_vertices = info.total_vertices;
 	GLuint				&total_indices = info.total_indices;
 	float*				&Vertices = info.Vertices;
@@ -62,7 +62,7 @@ protected:
 	bool deleteme = false;
 
 public:
-	mesh( GLSLProgram* prog, mesh_data info, bool isStripped = true );
+	mesh( GLSLProgram* prog, render_data info, bool isStripped = true );
 	~mesh();
 	bool isHidden() const { return deleteme; }
 
