@@ -63,6 +63,7 @@ class Texture_Manager
 		void LoadAll();
 		void LoadTexture(std::string file, std::string path);
 		GLuint GetID(std::string File, bool count_increase = true);
+		coope::tex* Find( texid ID );
 
 		void FreeTexture(GLuint texid);
 		void BindTexture(GLuint texid, GLuint texture_unit = GL_TEXTURE0);

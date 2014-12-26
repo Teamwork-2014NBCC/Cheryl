@@ -25,19 +25,19 @@ void input_mgr::Register_Action(int key_input_value, std::function<void()> actio
 void input_mgr::Add(int key_input_value)
 {
 	vector_mutex.lock();
-	input_list.push_back(key_input_value);
-	vector_mutex.unlock();
-}
-
-void input_mgr::Remove(int key_input_value)
-{
-	vector_mutex.lock();
-	for ( auto iter = input_list.begin(); iter != input_list.end(); ++iter )
+	if ( input_list.size() < 4 )
 	{
-		if ( key_input_value == *iter )
+		auto iter = input_list.begin();
+		for ( ; iter != input_list.end(); ++iter )
 		{
-			input_list.erase( iter );
-			break;
+			if ( key_input_value == *iter )
+			{
+				break;
+			}
+		}
+		if ( iter == input_list.end() )
+		{
+			input_list.push_back( key_input_value );
 		}
 	}
 	vector_mutex.unlock();
@@ -48,12 +48,14 @@ void input_mgr::ProcessQueue()
 	do
 	{
 		vector_mutex.lock();
-		for ( auto key_queued : input_list )
+		for ( auto iter = input_list.begin(); iter != input_list.end(); )
 		{
-			Run_Action(key_queued);
+			Run_Action( *iter );
+			input_list.erase( iter );
+			iter = input_list.begin();
 		}
-		vector_mutex.unlock();
 		std::this_thread::sleep_for( std::chrono::milliseconds( 250 ) );
+		vector_mutex.unlock();
 	} while ( thread_running );
 }
 

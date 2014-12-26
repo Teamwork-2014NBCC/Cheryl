@@ -1,12 +1,12 @@
 #ifndef _INPUT_H_
 #define _INPUT_H_
 
-#include <vector>
 #include <thread>
-#include <map>
 #include <mutex>
+#include <vector>
+#include <map>
 #include <functional>
-#include <algorithm>
+
 #include <Windows.h>
 #include <iostream>
 
@@ -30,7 +30,6 @@ public:
 	void ProcessQueue();
 	
 	void Add(int key_input_value);
-	void Remove(int key_input_value);
 
 	void MouseInput();
 

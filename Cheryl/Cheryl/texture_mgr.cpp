@@ -162,6 +162,16 @@ GLuint Texture_Manager::GetID(std::string File, bool count_increase)
 	}
 }
 
+coope::tex* Texture_Manager::Find( texid ID )
+{
+	auto iter = texture_map.find( ID );
+	if ( iter != texture_map.end() )
+	{
+		return iter->second;
+	}
+	return nullptr;
+}
+
 void Texture_Manager::FreeTexture(GLuint id)
 {
 	texture_itor = texture_map.find(id); //lookup this texture in our std::map
