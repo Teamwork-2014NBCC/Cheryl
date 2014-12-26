@@ -14,6 +14,9 @@
     <ClCompile Include="camera_controls.cpp" />
     <ClCompile Include="cell_manager.cpp" />
     <ClCompile Include="Combat.cpp" />
+    <ClCompile Include="gui.cpp" />
+    <ClCompile Include="gui_mgr.h" />
+    <ClCompile Include="sprite.cpp" />
     <ClCompile Include="util_func.cpp" />
     <ClCompile Include="directions.cpp" />
     <ClCompile Include="engine_funcs.cpp" />
@@ -32,6 +35,8 @@
     <ClInclude Include="boolstuff.h" />
     <ClInclude Include="cell_manager.h" />
     <ClInclude Include="Combat.h" />
+    <ClInclude Include="gui.h" />
+    <ClInclude Include="sprite.h" />
     <ClInclude Include="util_func.h" />
     <ClInclude Include="directions.h" />
     <ClInclude Include="Enemy.h" />

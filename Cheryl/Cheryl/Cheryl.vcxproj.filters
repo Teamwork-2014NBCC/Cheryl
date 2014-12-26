@@ -99,6 +99,15 @@
     <ClCompile Include="input_mgr.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="gui.cpp">
+      <Filter>Source Files\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite.cpp">
+      <Filter>Source Files\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="gui_mgr.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -166,6 +175,12 @@
     </ClInclude>
     <ClInclude Include="log.h">
       <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="gui.h">
+      <Filter>Header Files\Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.h">
+      <Filter>Header Files\Graphical</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
