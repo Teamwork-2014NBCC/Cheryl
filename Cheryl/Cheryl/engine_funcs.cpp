@@ -69,6 +69,7 @@ inline void game::Init()
 	//This is the directory Meshes and Textures are found in
 	File_Manager::Register_Directory( textures );
 	File_Manager::Register_Directory( models );
+	File_Manager::Register_Directory( graphic_dir );
 
 	// DARREN'S PROJECT DIRECTORY (right click a .cpp or .h tab above and open containing folder, copy paste directory into string)
 	File_Manager::Register_Directory( "" );
@@ -76,6 +77,9 @@ inline void game::Init()
 	Init_GFX();
 	Init_Input();
 
+	G = graphic_mgr.Get_Graphic( "white_button.png" );
+	G->dest_x = 10;
+	G->dest_y = 50;
 	Keeper_of_the_Font = new Font_Handler();
 	The_Maze.Descend();
 }
@@ -84,6 +88,7 @@ void game::Init_GFX()
 {
 	// Load Assets
 	txtr_mgr.LoadAll();
+	graphic_mgr.Load_All();
 	mesh_mgr.Load_All();
 
 	// Enable Blending
@@ -100,9 +105,10 @@ void game::Init_GFX()
 
 	// We need to prepare our 3d Shader
 	shader_3d = get_blit3d()->sManager->GetShader( "lighting.vert", "lighting.frag" );
+	shader_2d = get_blit3d()->shader2d;// get_blit3d()->sManager->GetShader( "shader2d.vert", "shader2d.frag" );
 	
 	// Preparing Variable Values
-	get_blit3d()->projectionMatrix *= glm::perspective( 45.0f, (GLfloat)( get_blit3d()->screenWidth ) / (GLfloat)( get_blit3d()->screenHeight ), 0.1f, 10000.0f );
+	get_blit3d()->projectionMatrix = glm::perspective( 45.0f, (GLfloat)( get_blit3d()->screenWidth ) / (GLfloat)( get_blit3d()->screenHeight ), 0.1f, 10000.0f );
 	glm::vec3 LightPosition = glm::vec3( 1.0f, 1.0f, 1.0f );
 	glm::vec3 LightIntensity = glm::vec3( 1.0f, 1.0f, 1.0f );
 	glm::vec3 Kd = glm::vec3( 1.0f, 1.0f, 0.2f );
@@ -110,6 +116,7 @@ void game::Init_GFX()
 	glm::vec3 Ks = glm::vec3( 1.0f, 1.0f, 1.0f );
 	GLfloat Shininess = 1.0f;
 	
+	// 3D Section
 	// Binding Values to Variables within shader
 	shader_3d->setUniform( "projectionMatrix", get_blit3d()->projectionMatrix );
 	shader_3d->setUniform( "LightPosition", LightPosition );
@@ -124,6 +131,14 @@ void game::Init_GFX()
 	shader_3d->bindAttribLocation( 2, "in_Texcoord" );
 	shader_3d->printActiveUniforms();
 	shader_3d->printActiveAttribs();
+
+	// 2D Section
+	// Binding Values to Variables within shader
+	shader_2d->setUniform( "in_Scale", 1.0f );
+	shader_2d->bindAttribLocation( 0, "in_Position" );
+	shader_2d->bindAttribLocation( 1, "in_Texcoord" );
+	shader_2d->printActiveUniforms();
+	shader_2d->printActiveAttribs();
 }
 
 void game::Init_Input()
@@ -161,7 +176,8 @@ inline void game::Draw( void )
 	View_Mutex.unlock();
 	SceneGraph.Draw();
 
-	get_blit3d()->SetMode( Blit3DRenderMode::BLIT2D, get_blit3d()->shader2d );
+	get_blit3d()->SetMode( Blit3DRenderMode::BLIT2D, shader_2d );
+	G->Draw();
 	Keeper_of_the_Font->Write( false, 100, 100, "Cheryl: Hello World!" );
 }
 

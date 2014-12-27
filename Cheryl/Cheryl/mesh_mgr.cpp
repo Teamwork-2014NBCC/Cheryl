@@ -1,17 +1,13 @@
 #include "mesh_mgr.h"
+#include "vbo_data.h"
 #include "global.h"
 #include "log.h"
-
-void s3d_mesh_mgr::Init()
-{
-}
 
 void s3d_mesh_mgr::Load_All()
 {
 	// prefix sl for string local type
 	using slFile_Name = std::string;
 	using slFile_Path = std::string;
-	Init();
 	std::map<slFile_Name, slFile_Path> path_map = File_Manager::Get_Files( ".s3d" );
 	std::map<slFile_Name, slFile_Path>::iterator path_itor = path_map.begin();
 	for ( ; path_itor != path_map.end(); ++path_itor )
@@ -65,7 +61,7 @@ mesh* s3d_mesh_mgr::Import_S3D_File( std::string file_path )
 
 			File_Handle.close();
 
-			render_data info( total_vertices, total_indices, Vertices, Indices, texture_file );
+			mesh_data info( total_vertices, total_indices, Vertices, Indices, texture_file );
 			mesh* mymesh = new mesh( get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" ), info );
 			return mymesh;
 		}

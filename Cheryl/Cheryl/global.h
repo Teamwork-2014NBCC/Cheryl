@@ -13,6 +13,7 @@ extern game& get_game_engine();
 
 extern string textures;
 extern string models;
+extern string graphic_dir;
 extern string otherfiles;
 
 extern std::mutex View_Mutex;

@@ -102,11 +102,17 @@
     <ClCompile Include="gui.cpp">
       <Filter>Source Files\Graphical</Filter>
     </ClCompile>
-    <ClCompile Include="sprite.cpp">
-      <Filter>Source Files\Graphical</Filter>
-    </ClCompile>
     <ClCompile Include="gui_mgr.h">
       <Filter>Header Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="vbo_data.cpp">
+      <Filter>Source Files\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="2d_graphic.cpp">
+      <Filter>Source Files\Graphical</Filter>
+    </ClCompile>
+    <ClCompile Include="2d_graphic_mgr.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,8 +185,14 @@
     <ClInclude Include="gui.h">
       <Filter>Header Files\Graphical</Filter>
     </ClInclude>
-    <ClInclude Include="sprite.h">
+    <ClInclude Include="vbo_data.h">
       <Filter>Header Files\Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="2d_graphic.h">
+      <Filter>Header Files\Graphical</Filter>
+    </ClInclude>
+    <ClInclude Include="2d_graphic_mgr.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

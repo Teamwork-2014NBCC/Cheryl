@@ -11,12 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="2d_graphic_mgr.cpp" />
     <ClCompile Include="camera_controls.cpp" />
     <ClCompile Include="cell_manager.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="gui.cpp" />
     <ClCompile Include="gui_mgr.h" />
-    <ClCompile Include="sprite.cpp" />
+    <ClCompile Include="2d_graphic.cpp" />
     <ClCompile Include="util_func.cpp" />
     <ClCompile Include="directions.cpp" />
     <ClCompile Include="engine_funcs.cpp" />
@@ -30,13 +31,15 @@
     <ClCompile Include="Stat_System.cpp" />
     <ClCompile Include="texture_mgr.cpp" />
     <ClCompile Include="thebuilder.cpp" />
+    <ClCompile Include="vbo_data.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="2d_graphic_mgr.h" />
     <ClInclude Include="boolstuff.h" />
     <ClInclude Include="cell_manager.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="gui.h" />
-    <ClInclude Include="sprite.h" />
+    <ClInclude Include="2d_graphic.h" />
     <ClInclude Include="util_func.h" />
     <ClInclude Include="directions.h" />
     <ClInclude Include="Enemy.h" />
@@ -56,6 +59,7 @@
     <ClInclude Include="Stat_System.h" />
     <ClInclude Include="texture_mgr.h" />
     <ClInclude Include="thebuilder.h" />
+    <ClInclude Include="vbo_data.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3C9C2256-CA78-4B78-8D52-C97AD629971D}</ProjectGuid>

@@ -2,23 +2,11 @@
 #include <string>
 
 
-
-void Texture_Manager::Init()
-{
-	//std::wstring ws(L"ABCD€FG");
-	//std::string s((const char*)&ws[0], sizeof(wchar_t)/sizeof(char)*ws.size());
-	
-	//File_Manager::Register_Directory(execution_path + L"/Textures/HUD/");
-}
-
-//void Texture_Manager::Unload_DirFiles()
-
 void Texture_Manager::LoadAll()
 {
 	// prefix sl for string local type
 	using slFile_Name = std::string;
 	using slFile_Path = std::string;
-	Init();
 	std::map<slFile_Name, slFile_Path> path_map = File_Manager::Get_Files(".png");
 	std::map<slFile_Name, slFile_Path>::iterator path_itor = path_map.begin();
 	for ( ; path_itor != path_map.end(); ++path_itor )
@@ -162,7 +150,7 @@ GLuint Texture_Manager::GetID(std::string File, bool count_increase)
 	}
 }
 
-coope::tex* Texture_Manager::Find( texid ID )
+coope::tex* Texture_Manager::GetTexPtr( texid ID )
 {
 	auto iter = texture_map.find( ID );
 	if ( iter != texture_map.end() )

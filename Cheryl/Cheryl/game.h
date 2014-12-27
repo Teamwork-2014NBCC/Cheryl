@@ -11,6 +11,7 @@
 #include "texture_mgr.h"
 #include "ffont.h"
 
+#include "2d_graphic_mgr.h"
 #include "mesh_mgr.h"
 #include "scene_nodes.h"
 
@@ -22,6 +23,7 @@ private:
 	input_mgr KeyInput_Mgr;
 	Root_SceneNode SceneGraph;
 	GLSLProgram* shader_3d = nullptr;
+	GLSLProgram* shader_2d = nullptr;
 	Font_Handler* Keeper_of_the_Font = nullptr;
 	Dungeon The_Maze = Dungeon( &SceneGraph );
 
@@ -32,6 +34,8 @@ private:
 	float cy = 10;
 	int player_x = 1;
 	int player_y = 1;
+
+	graphic* G = nullptr;
 
 protected:
 	void Init_GFX();
@@ -51,7 +55,9 @@ public:
 	void Draw();
 	void DoInput( int& key, int& scancode, int& action, int& mods );
 	void DoCursor( double& x, double& y );
+
 	Texture_Manager txtr_mgr;
+	Graphic_Manager graphic_mgr;
 	s3d_mesh_mgr mesh_mgr;
 };
 

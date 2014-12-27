@@ -3,7 +3,7 @@
 uniform sampler2D mytexture;
 
 in vec2 v_texcoord;
-in vec3 Position;
+in vec3 in_Position;
 uniform float in_Alpha;
 
 out vec4 out_Color;

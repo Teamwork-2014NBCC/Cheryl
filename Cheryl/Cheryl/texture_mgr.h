@@ -48,7 +48,6 @@ class Texture_Manager
 	public:
 		Texture_Manager()
 		{
-			//nothing
 		}
 		~Texture_Manager()
 		{
@@ -58,12 +57,10 @@ class Texture_Manager
 			}
 			auto iter = texture_map.begin();
 		}
-		void Init();
-		//void Unload_DirFiles(std::string path);
 		void LoadAll();
 		void LoadTexture(std::string file, std::string path);
 		GLuint GetID(std::string File, bool count_increase = true);
-		coope::tex* Find( texid ID );
+		coope::tex* GetTexPtr( texid ID );
 
 		void FreeTexture(GLuint texid);
 		void BindTexture(GLuint texid, GLuint texture_unit = GL_TEXTURE0);

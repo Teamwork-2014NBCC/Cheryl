@@ -37,7 +37,6 @@ public:
 		}
 		mesh_iter = mesh_map.begin();
 	}
-	void Init();
 	void Load_All();
 	void Load_Mesh( std::string file, std::string path );
 	mesh* Get_Mesh( std::string file_name );

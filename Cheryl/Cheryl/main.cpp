@@ -4,6 +4,7 @@
 
 string textures = "C:/Cheryl_Assets/textures/";
 string models = "C:/Cheryl_Assets/models/";
+string graphic_dir = "C:/Cheryl_Assets/2dgraphics/";
 string otherfiles = "C:/Cheryl_Assets/";
 
 //this code sets up memory leak detection
