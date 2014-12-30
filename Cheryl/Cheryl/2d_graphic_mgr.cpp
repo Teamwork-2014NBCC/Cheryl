@@ -4,7 +4,11 @@
 Graphic_Manager::Graphic_Manager()
 {
 	graphic_directory = "C:/Cheryl_Assets/2dgraphics/";
-	prog = get_blit3d()->shader2d;
+}
+
+void Graphic_Manager::set_shader( GLSLProgram* shader )
+{
+	shader_2d = shader;
 }
 
 void Graphic_Manager::Load_All()
@@ -63,7 +67,7 @@ void Graphic_Manager::Load_Graphic( std::string filename )
 	render_data info( 4, vertices );
 	info.texture_file = filename;
 	info.tex_id = texture_id;
-	graphic* g = new graphic( prog, info );
+	graphic* g = new graphic( shader_2d, info );
 
 	graphic_map[filename] = g;
 }

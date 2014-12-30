@@ -1,47 +1,64 @@
 #ifndef _FONT_HANDLER_H_
 #define _FONT_HANDLER_H_
 
+#include <iof_chunk.h>
 #include <blit3d/Blit3D.h>
+#include <map>
+#include "vbo_data.h"
 
 class FFont
 {
-	B3D::TVertex *verts;  // memory for vertice data
-	GLuint vboId;	// ID of VBO
-	GLuint vaoId;	//ID of the VAO
+	GLSLProgram* shader_2d = nullptr;
 
-	GLuint texID; //ID of texture
-	std::string textureName; //filename of the texture,
+	render_data		info;
+	std::string		&texture_file = info.texture_file;
+	GLuint				&tex_id = info.tex_id;
+
+	GLuint				&VAO_id = info.VAO_id;
+
+	GLuint				&Vertex_VBO_id = info.Vertex_VBO_id;
+	GLuint				&total_vertices = info.total_vertices;
+	float*				&Vertices = info.Vertices;
+
 	glm::mat4 modelMatrix; // Store the model matrix
-	int modelMatrixLocation; // Store the location of our model matrix in the shader
-	int alphaLocation; //store the location of the alpha variable in the shader	//-Fréderic Duguay
-	float fontSize;
 	int widths[256];
-	GLSLProgram *prog; //our shader for 2d rendering
+
+protected:
+	float FFont::WidthText( std::string text );
+	glm::vec3 cursor_position;
 
 public:
-	GLfloat dest_x; //window coordinates of the center of the sprite, in pixels
-	GLfloat dest_y;
-	GLfloat angle; //angle of the sprite, in degrees
-	GLfloat alpha;//-Fréderic Duguay
-	FFont( std::string TextureFileName, std::string widths_file, float fontsize, GLSLProgram *shader );
+	bool Fancy_Font = false;
+	glm::vec3 text_position;
+	float font_size;
+	float text_angle;
+	float text_alpha;
 
-	void DrawTxt( bool whichFont, float x, float y, std::string output ); //draws the string
-	float WidthText( bool whichFont, std::string output );//returns the width of the text string, in pixels
-	~FFont( void );
+	FFont();
+	FFont( float x, float y, float font_size = 16.0f, float text_alpha = 1.0f, float text_angle = 0.0f, bool Fancy_Font = false )	{
+		text_position.x = x;
+		text_position.y = y;
+		this->text_angle = text_angle;
+		this->text_alpha = text_alpha;
+		this->font_size = font_size;
+		this->Fancy_Font = Fancy_Font;
+	}
+	FFont& operator=( FFont& other )	{
+		this->cursor_position = glm::vec3( 0.0f );
+		this->text_position = other.text_position;
+		this->text_angle = other.text_angle;
+		this->text_alpha = other.text_alpha;
+		this->font_size = other.font_size;
+		this->Fancy_Font = other.Fancy_Font;
+		return *this;
+	}
+	void set_shader_2d( GLSLProgram* shader )		{ shader_2d = shader; }
+	void Initialize()														{ info.init(); }
+	void print( std::string text );
+
+	~FFont()																{ info.deinit(); delete Vertices; }
 };
 
-class Font_Handler
-{
-private:
-	FFont *ffont = nullptr;
-	float fontSize;
-
-public:
-	void Write( bool otherFont, int x, int y, std::string s );
-	void ChangeFontSize( float newSize );
-
-	Font_Handler( float fSize = 18 );
-	~Font_Handler();
-};
+extern FFont Fcout;
 
 #endif

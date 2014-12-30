@@ -3,6 +3,11 @@
 #include "global.h"
 #include "log.h"
 
+void s3d_mesh_mgr::set_Shader( GLSLProgram* shader_3d )
+{
+	this->shader_3d = shader_3d;
+}
+
 void s3d_mesh_mgr::Load_All()
 {
 	// prefix sl for string local type
@@ -28,6 +33,12 @@ void s3d_mesh_mgr::Load_Mesh( std::string file, std::string path )
 	}
 }
 
+/****************************************************
+* Imports meshes from an s3d file
+* 
+* Created by:	Josh Cooper		Date: Oct. 20, 2014
+* Modified by:	Josh Cooper		Date: Dec. 29, 2014
+*****************************************************/
 mesh* s3d_mesh_mgr::Import_S3D_File( std::string file_path )
 {
 	GLuint total_vertices = 0;
@@ -62,7 +73,7 @@ mesh* s3d_mesh_mgr::Import_S3D_File( std::string file_path )
 			File_Handle.close();
 
 			mesh_data info( total_vertices, total_indices, Vertices, Indices, texture_file );
-			mesh* mymesh = new mesh( get_blit3d()->sManager->UseShader( "lighting.vert", "lighting.frag" ), info );
+			mesh* mymesh = new mesh( shader_3d, info );
 			return mymesh;
 		}
 		catch ( ... )

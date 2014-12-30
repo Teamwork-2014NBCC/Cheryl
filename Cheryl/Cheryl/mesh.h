@@ -13,7 +13,7 @@ using std::ifstream;
 class mesh
 {
 private:
-	GLSLProgram*	prog = nullptr;
+	GLSLProgram*	shader_3d = nullptr;
 	bool bStripped = true;
 
 	mesh_data		info;
@@ -39,7 +39,7 @@ protected:
 	//bool deleteme = false;
 
 public:
-	mesh( GLSLProgram* prog, mesh_data info, bool isStripped = true );
+	mesh( GLSLProgram* shader, mesh_data info, bool isStripped = true );
 	~mesh();
 	//bool isHidden() const { return deleteme; }
 

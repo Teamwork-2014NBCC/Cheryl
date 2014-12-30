@@ -6,6 +6,7 @@ void render_data::init()
 	if ( !initialized )
 	{
 		initialized = true;
+		tex_id = get_game_engine().txtr_mgr.GetID( texture_file );
 
 		// Generate Vertex Buffer Object ID
 		glGenBuffers( 1, &Vertex_VBO_id );

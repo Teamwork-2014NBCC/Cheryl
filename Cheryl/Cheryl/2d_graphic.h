@@ -7,7 +7,8 @@
 class graphic
 {
 private:
-	GLSLProgram* prog = nullptr;
+	GLSLProgram* shader_2d = nullptr;
+
 	render_data		info;
 	std::string		&texture_file = info.texture_file;
 	GLuint				&tex_id = info.tex_id;
@@ -21,7 +22,7 @@ private:
 	glm::mat4 modelMatrix; // Store the model matrix 
 
 public:
-	graphic( GLSLProgram* prog, render_data info );
+	graphic( GLSLProgram* shader, render_data info );
 	~graphic();
 
 	GLfloat dest_x; 

@@ -24,7 +24,6 @@ private:
 	Root_SceneNode SceneGraph;
 	GLSLProgram* shader_3d = nullptr;
 	GLSLProgram* shader_2d = nullptr;
-	Font_Handler* Keeper_of_the_Font = nullptr;
 	Dungeon The_Maze = Dungeon( &SceneGraph );
 
 	glm::vec3 player_straight_axis;

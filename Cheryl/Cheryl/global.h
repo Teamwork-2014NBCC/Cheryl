@@ -16,6 +16,7 @@ extern string models;
 extern string graphic_dir;
 extern string otherfiles;
 
+extern FFont Fcout;
 extern std::mutex View_Mutex;
 extern glm::mat4 View_Matrix;
 extern glm::mat4 View_Angle;

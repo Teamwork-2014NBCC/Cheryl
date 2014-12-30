@@ -19,6 +19,7 @@
 #endif
 
 //GLOBAL DATA
+FFont Fcout;
 std::mutex View_Mutex;
 glm::mat4 View_Matrix = glm::mat4( 1.0f );
 glm::mat4 View_Angle = glm::mat4( 1.0f );
@@ -80,16 +81,29 @@ inline void game::Init()
 	G = graphic_mgr.Get_Graphic( "white_button.png" );
 	G->dest_x = 10;
 	G->dest_y = 50;
-	Keeper_of_the_Font = new Font_Handler();
 	The_Maze.Descend();
 }
 
 void game::Init_GFX()
 {
+	// We need to prepare our Shaders
+	shader_3d = get_blit3d()->sManager->GetShader( "lighting.vert", "lighting.frag" );
+	shader_2d = get_blit3d()->sManager->GetShader( "shader2d.vert", "shader2d.frag" );
+
 	// Load Assets
-	txtr_mgr.LoadAll();
-	graphic_mgr.Load_All();
-	mesh_mgr.Load_All();
+	///################################
+	txtr_mgr.LoadAll(); // Textures
+	
+	graphic_mgr.set_shader( shader_2d );
+	graphic_mgr.Load_All(); // Images (aka graphics)
+
+	mesh_mgr.set_Shader( shader_3d );
+	mesh_mgr.Load_All();  // Meshes
+
+	Fcout.set_shader_2d( shader_2d );
+	Fcout.Initialize();
+	///################################
+
 
 	// Enable Blending
 	glEnable( GL_BLEND );
@@ -103,9 +117,6 @@ void game::Init_GFX()
 	dir = View_Angle * glm::vec4( 1, 0, 0, 0 );
 	player_side_axis = glm::vec3( dir.x, dir.y, dir.z );
 
-	// We need to prepare our 3d Shader
-	shader_3d = get_blit3d()->sManager->GetShader( "lighting.vert", "lighting.frag" );
-	shader_2d = get_blit3d()->shader2d;// get_blit3d()->sManager->GetShader( "shader2d.vert", "shader2d.frag" );
 	
 	// Preparing Variable Values
 	get_blit3d()->projectionMatrix = glm::perspective( 45.0f, (GLfloat)( get_blit3d()->screenWidth ) / (GLfloat)( get_blit3d()->screenHeight ), 0.1f, 10000.0f );
@@ -155,7 +166,6 @@ void game::Init_Input()
 inline void game::DeInit( void )
 {
 	KeyInput_Mgr.Stop();
-	delete Keeper_of_the_Font;
 }
 
 inline void game::Update( double& seconds )
@@ -178,7 +188,8 @@ inline void game::Draw( void )
 
 	get_blit3d()->SetMode( Blit3DRenderMode::BLIT2D, shader_2d );
 	G->Draw();
-	Keeper_of_the_Font->Write( false, 100, 100, "Cheryl: Hello World!" );
+	Fcout = FFont( 100, 100 );
+	Fcout.print( "Cheryl: Hello World" );
 }
 
 inline void game::DoInput( int& key, int& scancode, int& action, int& mods )

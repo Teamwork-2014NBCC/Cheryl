@@ -9,12 +9,13 @@
 using std::stringstream;
 
 
-mesh::mesh( GLSLProgram* prog, mesh_data info, bool isStripped )
+mesh::mesh( GLSLProgram* shader, mesh_data info, bool isStripped )
 {
+	shader->use(); //Cannot remove this line (nothing will draw)
 	this->info = info;
 	this->info.init();
 
-	this->prog = prog;
+	shader_3d = shader;
 	bStripped = isStripped;
 }
 
@@ -27,8 +28,8 @@ mesh::~mesh()
 
 void mesh::draw( glm::mat4& modelMatrix )
 {
-	prog->use();
-	prog->setUniform( "modelMatrix", modelMatrix );
+	shader_3d->use();
+	shader_3d->setUniform( "modelMatrix", modelMatrix );
 
 	glBindVertexArray( VAO_id );
 	get_game_engine().txtr_mgr.BindTexture( tex_id );

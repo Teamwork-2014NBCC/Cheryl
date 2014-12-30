@@ -16,6 +16,7 @@
 class s3d_mesh_mgr
 {
 private:
+	GLSLProgram* shader_3d = nullptr;
 	std::map<std::string, mesh*> mesh_map;
 	std::map<std::string, mesh*>::iterator mesh_iter;
 
@@ -37,6 +38,7 @@ public:
 		}
 		mesh_iter = mesh_map.begin();
 	}
+	void set_Shader( GLSLProgram* shader_3d );
 	void Load_All();
 	void Load_Mesh( std::string file, std::string path );
 	mesh* Get_Mesh( std::string file_name );

@@ -9,7 +9,7 @@
 class Graphic_Manager
 {
 private:
-	GLSLProgram* prog;
+	GLSLProgram* shader_2d;
 	std::string graphic_directory;
 	std::map<std::string, graphic*> graphic_map;
 	std::map<std::string, graphic*>::iterator graphic_iter;
@@ -29,6 +29,7 @@ public:
 		}
 		graphic_iter = graphic_map.begin();
 	}
+	void set_shader( GLSLProgram* shader );
 	void Load_All();
 	graphic* Get_Graphic( std::string filename );
 };
