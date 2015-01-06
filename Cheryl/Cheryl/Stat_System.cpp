@@ -1,27 +1,61 @@
 #include "Stat_System.h"
 #include "Items.h"
 
-int base_game_entity::get_MoveSpeed()
+///## Get Movement ##
+// Math by: Travis Smith
+///############
+// Code by: Josh Cooper
+///############
+// Modified Last by: 
+float base_game_entity::get_MoveInterval()
 {
-	movementSpeed = 100 * (((float)speed / 100) + 1); // calculates att speed 100 * ((spd /100)+ 1)
-
-	return(movementSpeed);
+	moveInterval = 1;
+	auto convert_spd_to_move = [this]( int spd )
+	{
+		moveInterval += 1 / ( float( spd ) / 50 + 1);
+	};
+	if ( weapon )
+	{
+		convert_spd_to_move( weapon->get_Speed() );
+	}
+	if ( armour )
+	{
+		convert_spd_to_move( armour->get_Speed() );
+	}
+	convert_spd_to_move( speed );
+	return moveInterval;
 }
 
-float base_game_entity::calc_DodgeChance( int Speed_of_Attack)
+///## Get Dodge Chance ##
+// Math by: Travis Smith
+///############
+// Code by: Josh Cooper
+///############
+// Modified Last by: 
+float base_game_entity::get_DodgeChance()
 {
-	dodgeChance = speed * 2; // calculate dodge chance spd * 2
-
-	return(dodgeChance);
+	dodgeChance = 1 - get_MoveInterval();
+	return dodgeChance;
 }
 
-int base_game_entity::get_DamageReduction()
+///## Get Damage Reduction ##
+// Math by: Travis Smith
+///############
+// Code by: Josh Cooper
+///############
+// Modified Last by: 
+unsigned int base_game_entity::Reduce_Incoming_Damage( unsigned int damage )
 {
-	damageReduction = (0 + constitution / 2.5);  // calculated dmg reduction  0 + con/2.5
-
-	return(damageReduction);
+	damageReduction = ( 0 + constitution / 2.5 );  // calculated dmg reduction  0 + con/2.5
+	return( damageReduction );
 }
 
+///## Get Health ##
+// Math by: Travis Smith
+///############
+// Code by: Josh Cooper
+///############
+// Modified Last by: 
 int base_game_entity::get_Health()
 {
 	health = 1;

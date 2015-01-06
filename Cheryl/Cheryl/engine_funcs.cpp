@@ -103,7 +103,10 @@ void game::Init_GFX()
 	Fcout.set_shader_2d( shader_2d );
 	Fcout.Initialize();
 	///################################
-
+	std::vector<void*> list;
+	list.push_back( (void*)( &i ) );
+	T = new dynamic_text( "Value of i = %i%", list );
+	T->position = glm::vec3( 100, 80, 0 );
 
 	// Enable Blending
 	glEnable( GL_BLEND );
@@ -166,6 +169,7 @@ void game::Init_Input()
 inline void game::DeInit( void )
 {
 	KeyInput_Mgr.Stop();
+	delete T;
 }
 
 inline void game::Update( double& seconds )
@@ -188,8 +192,11 @@ inline void game::Draw( void )
 
 	get_blit3d()->SetMode( Blit3DRenderMode::BLIT2D, shader_2d );
 	G->Draw();
-	Fcout = FFont( 100, 100 );
+	Fcout = FFont( 100, 100, 20.0f );
 	Fcout.print( "Cheryl: Hello World" );
+	Fcout.font_size = 16.0f;
+	i++;
+	T->Draw();
 }
 
 inline void game::DoInput( int& key, int& scancode, int& action, int& mods )

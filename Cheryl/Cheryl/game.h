@@ -7,15 +7,14 @@
 #include <mutex>
 
 #include "input_mgr.h"
-
 #include "texture_mgr.h"
 #include "ffont.h"
-
-#include "2d_graphic_mgr.h"
 #include "mesh_mgr.h"
 #include "scene_nodes.h"
-
 #include "level_gen.h"
+#include "2d_graphic_mgr.h"
+#include "gui.h"
+
 
 class game
 {
@@ -35,6 +34,8 @@ private:
 	int player_y = 1;
 
 	graphic* G = nullptr;
+	dynamic_text* T = nullptr;
+	int i = 0;
 
 protected:
 	void Init_GFX();
